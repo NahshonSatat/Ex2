@@ -46,10 +46,13 @@ public class MyCoords implements coords_converter{
 		Point3D meter0 = new Point3D(gps0.Gps2Meter());
 		Point3D meter1 = new Point3D(gps1.Gps2Meter());
 		// the difference in meters
+		System.out.println(meter0);
+		System.out.println(meter1);
 		double x=meter1.x()-meter0.x();
 		double y=meter1.y()-meter0.y();
 		double z=meter1.z()-meter0.z();
 		Point3D vector3d = new Point3D(x,y,z);
+		System.out.println(vector3d);
 		return vector3d;
 	}
 
