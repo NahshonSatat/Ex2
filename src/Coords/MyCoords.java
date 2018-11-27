@@ -8,43 +8,19 @@ public class MyCoords implements coords_converter{
 		// TODO Auto-generated method stub
 		Point3D a=new Point3D(32.10332,35.20904,670);
 		Point3D b=new Point3D(32.10635,35.20523,650);
-		//System.out.println(distance3d1(a,b));
-		System.out.println(a);
-		System.out.println(toSpherical(a));
-		System.out.println(toCartesian(a));
-		
-		//System.out.println(toCartesian(a));
-		//System.out.println(toSpherical(a));
-		
+		MyCoords md = new MyCoords();
+		System.out.println(md.distance3d(a,b));
 	}
 	
 	@Override
 	public Point3D add(Point3D gps, Point3D local_vector_in_meter) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	  // true but not usefull
-	public static Point3D toSpherical (Point3D p) {
-		double x=p.x();
-	    double y=p.y();
-		double z=p.z();
-		//x=Math.toRadians(x);
-		//y=Math.toRadians(y);
-		//z=Math.toRadians(z);
-		double r=Math.sqrt(x*x+y*y+z*z);
-		double a=Math.cosh(z/(Math.sqrt(x*x+y*y+z*z)));
-		double b=Math.tanh(y/x);
-		
-		Point3D ret=new Point3D(r,a,b);
-		return ret;
-	}
-	  // true but not usefull
-	public static Point3D toCartesian (Point3D p) {
-		double x=p.x()*Math.sin(p.y())*Math.cos(p.z());
-	    double y=p.x()*Math.sin(p.y())*Math.sin(p.z());
-		double z=p.x()*Math.cos(p.y());
-		Point3D ret=new Point3D(x,y,z);
-		return ret;
+		//to meters
+		Point3D adding = new Point3D(gps.Gps2Meter());
+		//adding the points
+		adding.add(local_vector_in_meter);
+		// converting back to degree
+		Point3D gps2 = new Point3D(adding.meter2Gps());
+		return gps2;
 	}
 
 	@Override
@@ -56,9 +32,6 @@ public class MyCoords implements coords_converter{
 		// to radian 
 		double diffxR=(Math.toRadians(diffx));
 	    double diffyR=(Math.toRadians(diffy));
-		//double diffxR=diffx*(Math.PI/180);
-	    //double diffyR=diffy*(Math.PI/180);
-
 	    // to meter 
 	    double diffxM=Math.sin(diffxR)*RADIUS;
 	    double diffyM=Math.sin(diffyR)*RADIUS*LON_NORM;
@@ -66,36 +39,40 @@ public class MyCoords implements coords_converter{
 		return Math.sqrt(diffxM*diffxM+diffyM*diffyM);
 	}
 	
-	// just for testing
-	//493.0523
-	public static double distance3d1(Point3D gps0, Point3D gps1) {
-	    double RADIUS = 6371000;
-	    double LON_NORM = 0.847091174;
-		double diffx=gps1.x()-gps0.x();
-		double diffy=gps1.y()-gps0.y();
-		double diffxR=diffx*(Math.PI/180);
-	    double diffyR=diffy*(Math.PI/180);
-	    double diffxM=Math.sin(diffxR)*RADIUS;
-	    double diffyM=Math.sin(diffyR)*RADIUS*LON_NORM;
-		return Math.sqrt(diffxM*diffxM+diffyM*diffyM);
-	}
 
 	@Override
 	public Point3D vector3D(Point3D gps0, Point3D gps1) {
-		// TODO Auto-generated method stub
-		return null;
+		// converting to meters
+		Point3D meter0 = new Point3D(gps0.Gps2Meter());
+		Point3D meter1 = new Point3D(gps1.Gps2Meter());
+		// the difference in meters
+		double x=meter1.x()-meter0.x();
+		double y=meter1.y()-meter0.y();
+		double z=meter1.z()-meter0.z();
+		Point3D vector3d = new Point3D(x,y,z);
+		return vector3d;
 	}
 
 	@Override
 	public double[] azimuth_elevation_dist(Point3D gps0, Point3D gps1) {
-		// TODO Auto-generated method stub
-		return null;
+		double azimuth []= new double[3];
+		azimuth[0]=gps0.north_angle(gps1);
+		azimuth[1]=	gps0.up_angle(gps1);
+		azimuth[2]=distance3d(gps0,gps1);
+		return azimuth;
 	}
 
 	@Override
 	public boolean isValid_GPS_Point(Point3D p) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean flag=true;
+		if(p.x()>180||p.x()<-180)
+		flag= false;
+		if(p.y()>90||p.y()<-90)
+		flag= false;
+		// 8000= the high of the highest point on Earth( Mount Everest)
+		if(p.x()>8000||p.x()<-450)
+		flag= false;
+		return flag;
 	}
 
 }
