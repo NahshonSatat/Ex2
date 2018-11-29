@@ -7,10 +7,10 @@ public class MyCoords implements coords_converter{
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Point3D a=new Point3D(32.10332,35.20904,670);
-		Point3D b=new Point3D(32.10635,35.20523,650);
-		MyCoords md = new MyCoords();
-		System.out.println(md.distance3d(a,b));
+	//	Point3D a=new Point3D(32.10332,35.20904,670);
+	//	Point3D b=new Point3D(32.10635,35.20523,650);
+	//	MyCoords md = new MyCoords();
+	//	System.out.println(md.distance3d(a,b));
 	}
 	
 	@Override
@@ -40,12 +40,24 @@ public class MyCoords implements coords_converter{
 	}
 	@Override
 	public double distance3d(Point3D gps0, Point3D gps1) {
-    double dis =distance2d(gps0,gps1);
+	MyCoords md = new MyCoords();	
+    double dis =md.distance2d(gps0,gps1);
     double height=gps0.z()-gps1.z();
     double ans=Math.sqrt(dis*dis+height*height);
     return ans;
 	}
 	
+	@Override
+	public Point3D vector3D(Point3D gps0, Point3D gps1) {
+		MyCoords md = new MyCoords();
+		Point3D meter0 = new Point3D(gps0.Gps2Meter());
+		Point3D meter1 = new Point3D(gps1.Gps2Meter());
+		double x=meter1.x()-meter0.x();
+		double y=meter1.y()-meter0.y();
+		double z=meter1.z()-meter0.z();
+		Point3D ans = new Point3D(x,y,z);
+		return ans;
+	}
 
 	@Override
 	public double[] azimuth_elevation_dist(Point3D gps0, Point3D gps1) {
@@ -68,6 +80,8 @@ public class MyCoords implements coords_converter{
 		flag= false;
 		return flag;
 	}
+
+
 	
 	
 
