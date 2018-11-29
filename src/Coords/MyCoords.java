@@ -7,8 +7,21 @@ public class MyCoords implements coords_converter{
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-	//	Point3D a=new Point3D(32.10332,35.20904,670);
-	//	Point3D b=new Point3D(32.10635,35.20523,650);
+		MyCoords md =new MyCoords();
+		Point3D a=new Point3D(32.10332,35.20904,670);
+		Point3D b=new Point3D(32.10635,35.20523,650);
+		Point3D c=new Point3D(337.6989921,-359.2492069,-20);
+		System.out.println(md.vector3D(a,b));
+		System.out.println(c);
+//		Point3D d1=new Point3D(32.00000,35.00000,650);
+//		Point3D d2=new Point3D(32.00001,35.00001,650);
+		//System.out.println(md.distance2d(d1, d2));
+//		System.out.println(a);
+//		System.out.println(a.Gps2Meter1());
+//		System.out.println(a.Gps2Meter());
+//		System.out.println(a.Gps2Meter1().meter2Gps1());
+		
+		//System.out.println(c.Gps2Meter().meter2Gps());
 	//	MyCoords md = new MyCoords();
 	//	System.out.println(md.distance3d(a,b));
 	}
@@ -16,11 +29,11 @@ public class MyCoords implements coords_converter{
 	@Override
 	public Point3D add(Point3D gps, Point3D local_vector_in_meter) {
 		//to meters
-		Point3D adding = new Point3D(gps.Gps2Meter());
+		Point3D adding = new Point3D(gps.Gps2Meter1());
 		//adding the points
 		adding.add(local_vector_in_meter);
 		// converting back to degree
-		Point3D gps2 = new Point3D(adding.meter2Gps());
+		Point3D gps2 = new Point3D(adding.meter2Gps1());
 		return gps2;
 	}
 
@@ -50,8 +63,10 @@ public class MyCoords implements coords_converter{
 	@Override
 	public Point3D vector3D(Point3D gps0, Point3D gps1) {
 		MyCoords md = new MyCoords();
-		Point3D meter0 = new Point3D(gps0.Gps2Meter());
-		Point3D meter1 = new Point3D(gps1.Gps2Meter());
+		Point3D meter0 = new Point3D(gps0.Gps2Meter1());
+		Point3D meter1 = new Point3D(gps1.Gps2Meter1());
+		System.out.println(meter0);
+		System.out.println(meter1);
 		double x=meter1.x()-meter0.x();
 		double y=meter1.y()-meter0.y();
 		double z=meter1.z()-meter0.z();

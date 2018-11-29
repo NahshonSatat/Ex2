@@ -242,6 +242,7 @@ public final static int DOWN = 6, UP = 7;
 	public Point3D meter2Gps () {
 
 		//double RAD= 360 (=degree) / 40,075,000 (=earth perimeter in meters) ;
+		//one degree= 111,139 according to NASA
 		double RAD = 0.000008993;
 
 		double gpsY= _y*RAD;
@@ -252,6 +253,15 @@ public final static int DOWN = 6, UP = 7;
 
 		return output;
 
+	}
+	public Point3D meter2Gps1 () {
+	  double x=_x/6371000;
+	  double y=(_y/6371000)/0.847091174;
+      x=Math.asin(x);
+      y=Math.asin(y);
+      x=Math.toDegrees(x);
+      y=Math.toDegrees(y);
+      return new Point3D(x, y, _z);
 	}
 	public Point3D Gps2Meter () {
 
@@ -265,4 +275,14 @@ public final static int DOWN = 6, UP = 7;
 		return output;
 
 	}
+	public Point3D Gps2Meter1 () {
+		
+     double Rx=Math.toRadians(_x);
+     double Ry=Math.toRadians(_y);
+     double Mx=Math.sin(Rx)*6371000;
+     double My=Math.sin(Ry)*6371000*0.847091174;
+     return new Point3D(Mx, My, _z);
+      
+	}
 }
+
