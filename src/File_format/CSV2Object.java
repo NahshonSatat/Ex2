@@ -25,7 +25,7 @@ public class CSV2Object {
 	while (line != null) //maybe adding &&!line.isempty
 	{
 		My_GIS_element temp =new My_GIS_element(line);
-		layer.add(temp);
+		layer.add(temp,temp);
 		//			kmlString=kmlString+line.toString()+"\n";
 
 		line = brf.readLine();
