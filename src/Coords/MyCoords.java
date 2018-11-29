@@ -38,22 +38,22 @@ public class MyCoords implements coords_converter{
 	}
 
 	public double distance2d(Point3D gps0, Point3D gps1) {
-//	    double RADIUS = 6371000;
-//	    double LON_NORM = 0.847091174;
-//		double diffx=gps1.x()-gps0.x();
-//		double diffy=gps1.y()-gps0.y();
-//		// to radian 
-//		double diffxR=(Math.toRadians(diffx));
-//	    double diffyR=(Math.toRadians(diffy));
-//	    // to meter 
-//	    double diffxM=Math.sin(diffxR)*RADIUS;
-//	    double diffyM=Math.sin(diffyR)*RADIUS*LON_NORM;
-		Point3D meter0 = new Point3D(gps0.Gps2Meter1());
-		Point3D meter1 = new Point3D(gps1.Gps2Meter1());
-		double x=meter1.x()-meter0.x();
-		double y=meter1.y()-meter0.y();
+	    double RADIUS = 6371000;
+	    double LON_NORM = 0.847091174;
+		double diffx=gps1.x()-gps0.x();
+		double diffy=gps1.y()-gps0.y();
+		// to radian 
+		double diffxR=(Math.toRadians(diffx));
+	    double diffyR=(Math.toRadians(diffy));
+	    // to meter 
+	    double diffxM=Math.sin(diffxR)*RADIUS;
+	    double diffyM=Math.sin(diffyR)*RADIUS*LON_NORM;
+//		Point3D meter0 = new Point3D(gps0.Gps2Meter1());
+//		Point3D meter1 = new Point3D(gps1.Gps2Meter1());
+//		double x=meter1.x()-meter0.x();
+//		double y=meter1.y()-meter0.y();
 	    // Pitagoras 
-		return Math.sqrt(x*x+y*y);
+		return Math.sqrt(diffxM*diffxM+diffyM*diffyM);
 	}
 	@Override
 	public double distance3d(Point3D gps0, Point3D gps1) {
@@ -69,8 +69,8 @@ public class MyCoords implements coords_converter{
 		MyCoords md = new MyCoords();
 		Point3D meter0 = new Point3D(gps0.Gps2Meter1());
 		Point3D meter1 = new Point3D(gps1.Gps2Meter1());
-		System.out.println(meter0);
-		System.out.println(meter1);
+		//System.out.println(meter0);
+		//System.out.println(meter1);
 		double x=meter1.x()-meter0.x();
 		double y=meter1.y()-meter0.y();
 		double z=meter1.z()-meter0.z();
@@ -95,7 +95,7 @@ public class MyCoords implements coords_converter{
 		if(p.y()>90||p.y()<-90)
 		flag= false;
 		// 8000= the high of the highest point on Earth( Mount Everest)
-		if(p.x()>8000||p.x()<-450)
+		if(p.z()>8000||p.z()<-450)
 		flag= false;
 		return flag;
 	}

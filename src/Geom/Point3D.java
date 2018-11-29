@@ -239,21 +239,21 @@ public final static int DOWN = 6, UP = 7;
 	public static double d2r(double a) { return Math.toRadians(a);}
 	////////////////////////////////////////////////////////////////////////////////
 	
-	public Point3D meter2Gps () {
-
-		//double RAD= 360 (=degree) / 40,075,000 (=earth perimeter in meters) ;
-		//one degree= 111,139 according to NASA
-		double RAD = 0.000008993;
-
-		double gpsY= _y*RAD;
-		double gpsX = _x*RAD/ Math.cos(gpsY * (Math.PI / 180));
-		double gpsZ = _z;
-
-		Point3D output = new Point3D(gpsX, gpsY, gpsZ);
-
-		return output;
-
-	}
+//	public Point3D meter2Gps () {
+//
+//		//double RAD= 360 (=degree) / 40,075,000 (=earth perimeter in meters) ;
+//		//one degree= 111,139 according to NASA
+//		double RAD = 0.000008993;
+//
+//		double gpsY= _y*RAD;
+//		double gpsX = _x*RAD/ Math.cos(gpsY * (Math.PI / 180));
+//		double gpsZ = _z;
+//
+//		Point3D output = new Point3D(gpsX, gpsY, gpsZ);
+//
+//		return output;
+//
+//	}
 	public Point3D meter2Gps1 () {
 	  double x=_x/6371000;
 	  double y=(_y/6371000)/0.847091174;
@@ -263,18 +263,18 @@ public final static int DOWN = 6, UP = 7;
       y=Math.toDegrees(y);
       return new Point3D(x, y, _z);
 	}
-	public Point3D Gps2Meter () {
-
-		double RAD = 0.000008993;
-		double metY= _y/RAD;
-		double metX = (_x*Math.cos(_y * (Math.PI / 180))/RAD);
-		double metZ = _z;
-
-		Point3D output = new Point3D(metX, metY, metZ);
-
-		return output;
-
-	}
+//	public Point3D Gps2Meter () {
+//
+//		double RAD = 0.000008993;
+//		double metY= _y/RAD;
+//		double metX = (_x*Math.cos(_y * (Math.PI / 180))/RAD);
+//		double metZ = _z;
+//
+//		Point3D output = new Point3D(metX, metY, metZ);
+//
+//		return output;
+//
+//	}
 	public Point3D Gps2Meter1 () {
 		
      double Rx=Math.toRadians(_x);
