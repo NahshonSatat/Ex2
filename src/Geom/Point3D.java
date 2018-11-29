@@ -241,7 +241,7 @@ public final static int DOWN = 6, UP = 7;
 	
 	public Point3D meter2Gps () {
 
-		//double RAD= 1 / ((2 * Math.PI / 360) * 6378.137) / 1000;
+		//double RAD= 360 (=degree) / 40,075,000 (=earth perimeter in meters) ;
 		double RAD = 0.000008993;
 
 		double gpsY= _y*RAD;

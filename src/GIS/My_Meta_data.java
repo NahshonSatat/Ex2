@@ -9,6 +9,13 @@ public class My_Meta_data implements Meta_data {
     private String Type;
     private String AccuracyMeters;   
 	
+    public My_Meta_data (long UTC,String MAC,String SSID,String AccuracyMeters,String Type) {
+    	this.UTC=UTC;
+    	this.SSID=SSID;
+    	this.MAC=MAC;
+    	this.Type=Type;
+    	this.AccuracyMeters=AccuracyMeters;
+    }
 	//
 	@Override
 	public long getUTC() { 	
