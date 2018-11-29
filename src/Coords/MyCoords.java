@@ -24,8 +24,7 @@ public class MyCoords implements coords_converter{
 		return gps2;
 	}
 
-	@Override
-	public double distance3d(Point3D gps0, Point3D gps1) {
+	public double distance2d(Point3D gps0, Point3D gps1) {
 	    double RADIUS = 6371000;
 	    double LON_NORM = 0.847091174;
 		double diffx=gps1.x()-gps0.x();
@@ -38,6 +37,13 @@ public class MyCoords implements coords_converter{
 	    double diffyM=Math.sin(diffyR)*RADIUS*LON_NORM;
 	    // Pitagoras 
 		return Math.sqrt(diffxM*diffxM+diffyM*diffyM);
+	}
+	@Override
+	public double distance3d(Point3D gps0, Point3D gps1) {
+    double dis =distance2d(gps0,gps1);
+    double height=gps0.z()-gps1.z();
+    double ans=Math.sqrt(dis*dis+height*height);
+    return ans;
 	}
 	
 
