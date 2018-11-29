@@ -31,9 +31,8 @@ public class My_GIS_element implements  GIS_element {
     
     // according to -"https://stackoverflow.com/questions/12081417/convert-utc-date-into-milliseconds"
     private long toUtc(String time) throws ParseException {
-    	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.US);
+    	SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.US);
     	format.setTimeZone(TimeZone.getTimeZone("UTC"));
-
     	Date date = format.parse(time);
     	long millis = date.getTime();
     	return millis;
@@ -58,7 +57,7 @@ public class My_GIS_element implements  GIS_element {
 	}
 	public static void main(String[] args) throws ParseException {
 		My_GIS_element m= new My_GIS_element();
-		long l =m.toUtc("03/12/2017 08:53:08");
+		long l =m.toUtc("03-12-2017 08:53:08");
 		System.out.println(l);
 	}
 
