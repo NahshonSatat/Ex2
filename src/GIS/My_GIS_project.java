@@ -19,7 +19,7 @@ public class My_GIS_project  extends  HashSet<GIS_layer> implements GIS_project 
 	public Meta_data get_Meta_data() {
 		return MTP;
 	}
-    public Iterator<GIS_layer>iterator(){
+    public Iterator<GIS_layer>iteretor(){
     	return this.iterator();	
     }
 

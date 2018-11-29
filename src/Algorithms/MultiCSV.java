@@ -87,7 +87,7 @@ public class MultiCSV {
 		MY_GIS_layer temp_layer=new MY_GIS_layer();
 		while (i.hasNext()) {
 			temp_layer = (MY_GIS_layer) i.next();
-			 Iterator<GIS_element> it = temp_layer.iterator();
+			 Iterator<GIS_element> it = temp_layer.iteretor();
 			 My_GIS_element temp_element=new My_GIS_element();
 			 while(it.hasNext()) {
 				 temp_element=(My_GIS_element) it.next();
@@ -129,14 +129,14 @@ public class MultiCSV {
 		
 
 		
-	
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		//System.out.println("Reading files under the folder "+ folder.getAbsolutePath());
 		//  listFilesForFolder(folder);
-		MultiCSV test =new MultiCSV("C:\\Users\\נחשון סתת\\eclipse-workspace\\Java");
+		MultiCSV test =new MultiCSV("C:\\Users\\אליהו סתת\\eclipse-workspace\\Java");
 		listFilesForFolder1(folder);
-		System.err.println("1111");
+		//System.err.println("1111");
+		test.toKml();
 		//System.out.println(MultiCSV.project.toString());
 		
 	}
