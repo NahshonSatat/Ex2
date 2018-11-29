@@ -11,8 +11,8 @@ public class MyCoords implements coords_converter{
 		Point3D a=new Point3D(32.10332,35.20904,670);
 		Point3D b=new Point3D(32.10635,35.20523,650);
 		Point3D c=new Point3D(337.6989921,-359.2492069,-20);
-		System.out.println(md.vector3D(a,b));
-		System.out.println(c);
+		System.out.println(md.distance2d(a,b));
+		//System.out.println(c);
 //		Point3D d1=new Point3D(32.00000,35.00000,650);
 //		Point3D d2=new Point3D(32.00001,35.00001,650);
 		//System.out.println(md.distance2d(d1, d2));
@@ -38,18 +38,22 @@ public class MyCoords implements coords_converter{
 	}
 
 	public double distance2d(Point3D gps0, Point3D gps1) {
-	    double RADIUS = 6371000;
-	    double LON_NORM = 0.847091174;
-		double diffx=gps1.x()-gps0.x();
-		double diffy=gps1.y()-gps0.y();
-		// to radian 
-		double diffxR=(Math.toRadians(diffx));
-	    double diffyR=(Math.toRadians(diffy));
-	    // to meter 
-	    double diffxM=Math.sin(diffxR)*RADIUS;
-	    double diffyM=Math.sin(diffyR)*RADIUS*LON_NORM;
+//	    double RADIUS = 6371000;
+//	    double LON_NORM = 0.847091174;
+//		double diffx=gps1.x()-gps0.x();
+//		double diffy=gps1.y()-gps0.y();
+//		// to radian 
+//		double diffxR=(Math.toRadians(diffx));
+//	    double diffyR=(Math.toRadians(diffy));
+//	    // to meter 
+//	    double diffxM=Math.sin(diffxR)*RADIUS;
+//	    double diffyM=Math.sin(diffyR)*RADIUS*LON_NORM;
+		Point3D meter0 = new Point3D(gps0.Gps2Meter1());
+		Point3D meter1 = new Point3D(gps1.Gps2Meter1());
+		double x=meter1.x()-meter0.x();
+		double y=meter1.y()-meter0.y();
 	    // Pitagoras 
-		return Math.sqrt(diffxM*diffxM+diffyM*diffyM);
+		return Math.sqrt(x*x+y*y);
 	}
 	@Override
 	public double distance3d(Point3D gps0, Point3D gps1) {
