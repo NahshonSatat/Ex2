@@ -65,7 +65,7 @@ public class MyCoords implements coords_converter{
 		azimuth[2]=distance3d(gps0,gps1);
 		return azimuth;
 	}
-
+	//hello
 	@Override
 	public boolean isValid_GPS_Point(Point3D p) {
 		boolean flag=true;
