@@ -4,6 +4,7 @@ import Geom.Point3D;
 
 public class MyCoords implements coords_converter{
 
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Point3D a=new Point3D(32.10332,35.20904,670);
@@ -77,5 +78,8 @@ public class MyCoords implements coords_converter{
 		flag= false;
 		return flag;
 	}
+	
+	
+
 
 }
