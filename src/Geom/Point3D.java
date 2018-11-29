@@ -254,6 +254,7 @@ public final static int DOWN = 6, UP = 7;
 //		return output;
 //
 //	}
+	
 	public Point3D meter2Gps1 () {
 	  double x=_x/6371000;
 	  double y=(_y/6371000)/0.847091174;
