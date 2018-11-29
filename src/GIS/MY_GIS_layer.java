@@ -25,6 +25,9 @@ public class MY_GIS_layer extends HashSet<GIS_element> implements GIS_layer {
 	public Meta_data_layer getMD() {
 		return MD;
 	}
+    public Iterator<GIS_element> iterator(){
+    	return this.iterator();	
+    }
 
 
 

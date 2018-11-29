@@ -13,8 +13,9 @@ public class My_GIS_element implements  GIS_element {
     private Point3D Geom ;
     private My_Meta_data Data ;
     
-    My_GIS_element(){
-    	
+    public My_GIS_element(){
+    	Geom=new Point3D(0,0,0);
+    	Data=new My_Meta_data();
     }
     public My_GIS_element(String line) throws ParseException {
 		String[] arr=line.split(",");
@@ -47,6 +48,12 @@ public class My_GIS_element implements  GIS_element {
 	public Meta_data getData() {
 		
 		return this.Data;
+	}
+	public My_Meta_data Data() {
+		return this.Data;
+	}
+	public Point3D Geom() {
+		return this.Geom;
 	}
 	
 

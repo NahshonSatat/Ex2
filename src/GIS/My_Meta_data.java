@@ -5,7 +5,7 @@ import java.text.ParseException;
 import Geom.Point3D;
 
 public class My_Meta_data implements Meta_data {
-    private long UTC;
+	private long UTC;
     private String SSID;
     private String MAC;
     private String Type;
@@ -19,6 +19,13 @@ public class My_Meta_data implements Meta_data {
     	this.MAC=MAC;
     	this.Type=Type;
     	this.AccuracyMeters=AccuracyMeters;
+    }
+    public My_Meta_data () {
+    	this.UTC=1000;
+    	this.SSID="";
+    	this.MAC="";
+    	this.Type="";
+    	this.AccuracyMeters="";
     }
     
     public My_Meta_data(My_GIS_element mmd) throws ParseException {

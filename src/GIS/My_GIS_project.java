@@ -2,9 +2,11 @@ package GIS;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class My_GIS_project  extends  HashSet<GIS_layer> implements GIS_project {
-    private Meta_data_project MTP;
+   private Meta_data_project MTP;
+   
    public My_GIS_project(){
     	super();
     	MTP=new Meta_data_project();
@@ -17,5 +19,8 @@ public class My_GIS_project  extends  HashSet<GIS_layer> implements GIS_project 
 	public Meta_data get_Meta_data() {
 		return MTP;
 	}
+    public Iterator<GIS_layer>iterator(){
+    	return this.iterator();	
+    }
 
 }
