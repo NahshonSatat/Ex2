@@ -15,7 +15,7 @@ public class CSV2Object {
 	
 	
 	public MY_GIS_layer ReadFile(File e) throws Exception {
-		MY_GIS_layer layer =new My_GIS_layer();
+		MY_GIS_layer layer =new MY_GIS_layer();
 		
 	BufferedReader brf =new BufferedReader(new FileReader(e)) ;
 	
