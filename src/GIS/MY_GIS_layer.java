@@ -23,7 +23,7 @@ public class MY_GIS_layer extends HashSet<GIS_element> implements GIS_layer {
      	/**
      	 * anther add function Additionally on the  add function - to save the mata data on anther data 
      	 */
-         public void add(My_GIS_element m1,My_GIS_element m2) throws ParseException {
+         public void add(My_GIS_element m1,boolean m2) throws ParseException {
         	 this.add(m1);
         	 MD.add(m1);
          }

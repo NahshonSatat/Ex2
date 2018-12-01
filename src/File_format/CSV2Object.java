@@ -37,7 +37,8 @@ public class CSV2Object {
 	{
 		// builds anther gps point from the line(the line is now string with ',')
 		My_GIS_element temp =new My_GIS_element(line);
-		layer.add(temp,temp);
+		// Using the second function add
+		layer.add(temp,true);
     // getting the next line 
 		line = brf.readLine();
 	}
