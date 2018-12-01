@@ -11,27 +11,42 @@ import java.util.TimeZone;
 import Geom.Point3D;
 
 public class Meta_data_layer implements Meta_data{
+	/**
+	 * This class represents ArrayList of meta data
+	 * @author eliahu satat , nashon satat
+	 */
 	private ArrayList<My_Meta_data> MTlayer;
 	
+	
+ 	/**
+ 	 * empty contractor
+ 	 */
      public Meta_data_layer() {
     	 MTlayer=new ArrayList<My_Meta_data>();
      }
-     
+  	/**
+  	 * add anther meta data to the list
+  	 */
      public void add(My_GIS_element m) throws ParseException {
  		My_Meta_data data = new My_Meta_data(m);
  		MTlayer.add(data);
      }
-	// according to: "https://stackoverflow.com/questions/5175728/how-to-get-the-current-date-time-in-java"
+  	/**
+   	 * Gives the current UTC
+   	 *  according to: "https://stackoverflow.com/questions/5175728/how-to-get-the-current-date-time-in-java"
+   	 */
 	@Override
 	public long getUTC() throws ParseException {
 		String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
 		return toUtc(timeStamp);
 	}
-    // according to -"https://stackoverflow.com/questions/12081417/convert-utc-date-into-milliseconds"
-    private long toUtc(String time) throws ParseException {
+  	/**
+   	 * help to the "getUTC" function
+   	 *  according to: "https://stackoverflow.com/questions/12081417/convert-utc-date-into-milliseconds"
+   	 */
+	    private long toUtc(String time) throws ParseException {
     	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.US);
     	format.setTimeZone(TimeZone.getTimeZone("UTC"));
-
     	Date date = format.parse(time);
     	long millis = date.getTime();
     	return millis;

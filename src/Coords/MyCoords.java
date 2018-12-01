@@ -3,8 +3,13 @@ package Coords;
 import Geom.Point3D;
 
 public class MyCoords implements coords_converter{
-
-
+	/**
+	 * This class has function on coordinate
+	 * @author eliahu satat , nashon satat
+	 */
+	
+	/*
+	 * only for test myself
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		MyCoords md =new MyCoords();
@@ -12,20 +17,11 @@ public class MyCoords implements coords_converter{
 		Point3D b=new Point3D(32.10635,35.20523,650);
 		Point3D c=new Point3D(337.6989921,-359.2492069,-20);
 		System.out.println(md.distance2d(a,b));
-		//System.out.println(c);
-//		Point3D d1=new Point3D(32.00000,35.00000,650);
-//		Point3D d2=new Point3D(32.00001,35.00001,650);
-		//System.out.println(md.distance2d(d1, d2));
-//		System.out.println(a);
-//		System.out.println(a.Gps2Meter1());
-//		System.out.println(a.Gps2Meter());
-//		System.out.println(a.Gps2Meter1().meter2Gps1());
 		
-		//System.out.println(c.Gps2Meter().meter2Gps());
-	//	MyCoords md = new MyCoords();
-	//	System.out.println(md.distance3d(a,b));
 	}
+	*/
 	
+	/** computes a new point which is the gps point transformed by a 3D vector (in meters)*/
 	@Override
 	public Point3D add(Point3D gps, Point3D local_vector_in_meter) {
 		//to meters
@@ -37,6 +33,9 @@ public class MyCoords implements coords_converter{
 		return gps2;
 	}
 
+	/** computes the distance between two points 2d (in meters)
+	 * According to the according to the given excel
+	 * */
 	public double distance2d(Point3D gps0, Point3D gps1) {
 	    double RADIUS = 6371000;
 	    double LON_NORM = 0.847091174;
@@ -48,13 +47,10 @@ public class MyCoords implements coords_converter{
 	    // to meter 
 	    double diffxM=Math.sin(diffxR)*RADIUS;
 	    double diffyM=Math.sin(diffyR)*RADIUS*LON_NORM;
-//		Point3D meter0 = new Point3D(gps0.Gps2Meter1());
-//		Point3D meter1 = new Point3D(gps1.Gps2Meter1());
-//		double x=meter1.x()-meter0.x();
-//		double y=meter1.y()-meter0.y();
 	    // Pitagoras 
 		return Math.sqrt(diffxM*diffxM+diffyM*diffyM);
 	}
+	/** computes the 3D distance (in meters) between the two gps like points */
 	@Override
 	public double distance3d(Point3D gps0, Point3D gps1) {
 	MyCoords md = new MyCoords();	
@@ -64,6 +60,7 @@ public class MyCoords implements coords_converter{
     return ans;
 	}
 	
+	/** computes the 3D vector (in meters) between two gps like points */
 	@Override
 	public Point3D vector3D(Point3D gps0, Point3D gps1) {
 		MyCoords md = new MyCoords();
@@ -78,6 +75,11 @@ public class MyCoords implements coords_converter{
 		return ans;
 	}
 
+	
+	/** computes the polar representation of the 3D vector be gps0-->gps1 
+	 * Note: this method should return an azimuth (aka yaw), elevation (pitch), and distance
+	 * note its use the point 3d function that Buaz gave us  
+	 * */
 	@Override
 	public double[] azimuth_elevation_dist(Point3D gps0, Point3D gps1) {
 		double azimuth []= new double[3];
@@ -86,7 +88,12 @@ public class MyCoords implements coords_converter{
 		azimuth[2]=distance3d(gps0,gps1);
 		return azimuth;
 	}
-	//hello
+	
+	/**
+	 * return true iff this point is a valid lat, lon , lat coordinate: [-180,+180],[-90,+90],[-450, 8000]
+	 * @param p
+	 * @return
+	 */
 	@Override
 	public boolean isValid_GPS_Point(Point3D p) {
 		boolean flag=true;

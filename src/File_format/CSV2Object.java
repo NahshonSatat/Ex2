@@ -13,23 +13,35 @@ import GIS.My_GIS_element;
 
 public class CSV2Object {
 	
+  	/**
+  	 * this class nows to convert a csv file to a layer
+  	 */
 	
-	public MY_GIS_layer ReadFile(File e) throws Exception {
+	
+	
+	/**
+  	 * its had only one function that get file read from his line by line and convert them to elements
+  	 * and build MY_GIS_layer with all the points and return it
+  	 */
+  public MY_GIS_layer ReadFile(File e) throws Exception {
 		MY_GIS_layer layer =new MY_GIS_layer();
 		
 	BufferedReader brf =new BufferedReader(new FileReader(e)) ;
 	
 	String line=brf.readLine();
-	line=brf.readLine();//maybe i lose an important(first) line
+	// the first two lines are headlines
 	line=brf.readLine();
-	while (line != null) //maybe adding &&!line.isempty
+	line=brf.readLine();
+	// open every line
+	while (line != null) 
 	{
+		// builds anther gps point from the line(the line is now string with ',')
 		My_GIS_element temp =new My_GIS_element(line);
 		layer.add(temp,temp);
-		//			kmlString=kmlString+line.toString()+"\n";
-
+    // getting the next line 
 		line = brf.readLine();
 	}
+  // 	return the all csv file as a layer 
 	return layer;
 
 	}
