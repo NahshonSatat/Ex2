@@ -101,10 +101,11 @@ public class MultiCSV {
 	public void toKml() {
 		
        // the openig of kml file
+		//<Style id=\"red\"><IconStyle><Icon>
 		String kmlString=
 				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" + 
-				"<kml xmlns=\"http://www.opengis.net/kml/2.2\">"+"\n"
-				+"<Document><Folder >\n";
+				"<kml xmlns=\"http://www.opengis.net/kml/2.2\">"
+				+"<Document><Style id=\"red\"><IconStyle><Icon><href>http://maps.google.com/mapfiles/ms/icons/red-dot.png</href></Icon></IconStyle></Style><Style id=\"yellow\"><IconStyle><Icon><href>http://maps.google.com/mapfiles/ms/icons/yellow-dot.png</href></Icon></IconStyle></Style><Style id=\"green\"><IconStyle><Icon><href>http://maps.google.com/mapfiles/ms/icons/green-dot.png</href></Icon></IconStyle></Style><Folder><name>Wifi Networks</name></Folder>\n";
 		Iterator<GIS_layer> i = project.iterator();
 		MY_GIS_layer temp_layer=new MY_GIS_layer();
 		// run over all the project
@@ -122,7 +123,7 @@ public class MultiCSV {
 		}
 		
 		// the end of the kml format
-		kmlString=kmlString+"</Folder></Document>\n</kml>";
+		kmlString=kmlString+"</Document>\n</kml>";
      	
 		
 		// export it - to kml file by the name-"kmlProject" in the project folder
@@ -152,7 +153,7 @@ public class MultiCSV {
 	{
 		String str="<Placemark>\n"
 				+ "<name>"+"<![CDATA[" + m.Data().getSSID()+ "]]>"+"</name>\n"
-				+"<description>"+ m.Data().getType()+"</description>\n"
+				+"<description>"+ m.Data().getType()+"</description>l><styleUrl>#red</styleUrl>\n"
 				+"<Point><coordinates>"+m.Geom().x()+","+m.Geom().y()+","+m.Geom().z()+"</coordinates></Point>\n"
 				+"<time>"+m.Data().getUTC()+"</time></Placemark>\n";
 		
@@ -164,12 +165,12 @@ public class MultiCSV {
 		// for testing the class
 	public static void main(String[] args) throws Exception {
 		
-		// Build the object with the folder path
-		MultiCSV test =new MultiCSV("C:\\Users\\אליהו סתת\\eclipse-workspace\\Java");
-		// run over the folder and convert it to a project 
-		Folder2project(folder);
-		// build from this project kml file
-		test.toKml();
+//		// Build the object with the folder path
+//		MultiCSV test =new MultiCSV("C:\\Users\\אליהו סתת\\eclipse-workspace\\Java");
+//		// run over the folder and convert it to a project 
+//		Folder2project(folder);
+//		// build from this project kml file
+//		test.toKml();
 		
 	}
 
