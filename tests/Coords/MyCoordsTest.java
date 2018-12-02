@@ -57,8 +57,8 @@ class MyCoordsTest {
 		Point3D b=new Point3D(32.10635,35.205223,650);
 		Point3D actual =md.vector3D(a, b);
 		Point3D expected=new Point3D(285.3977399528958,-293.7637650333345,-20);
-		System.out.println(actual.x()+","+actual.y()+","+actual.z());
-		System.out.println(expected.x()+","+expected.y()+","+expected.z());
+		//System.out.println(actual.x()+","+actual.y()+","+actual.z());
+		//System.out.println(expected.x()+","+expected.y()+","+expected.z());
 		if(actual.x()!=expected.x()||actual.y()!=expected.y()||actual.z()!=expected.z()) {
 			fail("this sepus to be -32.10575449170983,35.205808273742996,650");
 		}

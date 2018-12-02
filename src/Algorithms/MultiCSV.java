@@ -50,6 +50,8 @@ public class MultiCSV {
 
 	/**
 	 * this function run  over the folder Recursively and convert it to a project(list of layers)
+	 * open source:
+	 * according- http://www.avajava.com/tutorials/lessons/how-do-i-recursively-display-all-files-and-directories-in-a-directory.html
 	 */
 	public static void Folder2project(final File folder) throws Exception
 	{
@@ -60,32 +62,13 @@ public class MultiCSV {
 				Folder2project(fileEntry);
 			} 
 			else {
-
-				//System.out.println(fileEntry.getName());
 				// if this file is a csv file
 				if(fileEntry.getName().contains(".csv")) {
 					// use CSV2Object object
 					CSV2Object toObject=new CSV2Object();
 					// and add the it has a new layer to the project
 					project.add(toObject.ReadFile(fileEntry),true);
-				//System.err.println("yes!!!!!!!!!");
 
-//					String line = "";
-//					String cvsSplitBy = ",";
-//
-//					try (BufferedReader br = new BufferedReader(new FileReader(fileEntry))) 
-//					{
-//						while ((line = br.readLine()) != null) 
-//						{
-//
-//							String[] userInfo = line.split(cvsSplitBy);
-//						}
-//					
-//
-//					} catch (IOException e) 
-//					{
-//						e.printStackTrace();
-//					}
 				}
 
 			}
