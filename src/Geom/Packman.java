@@ -3,8 +3,14 @@ package Geom;
 import GIS.My_Meta_data;
 
 public class Packman  {
-	private double Radius,id,speed;
+	private double Radius;
+	private double id;
+	private double speed;
 	private Point3D point; 
+//	public Packman() {
+//		point=new
+//	}
+	//}
 	public Packman(double lat,double lon,double alt,double speed,double id,double Radius) {
 		this.point=new Point3D(lat,lon,alt);
 		this.id=id;
@@ -23,6 +29,9 @@ public class Packman  {
 		this.point=new Point3D(x,y,z);
 		this.id=id;
 		this.speed=speed;
-		this.Radius=Radius;
+		this.Radius=radius;
+	}
+	public String toString() {
+		return id+","+point.x()+","+point.y()+","+point.z()+","+speed+","+Radius;
 	}
 }

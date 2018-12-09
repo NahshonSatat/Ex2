@@ -2,7 +2,8 @@ package Geom;
 
 public class Fruit {
 	
-	private double Weight,id;
+	private double Weight;
+	private double id;
 	private Point3D point; 
 	
 	public Fruit(double lat,double lon,double alt,double Weight,double id) {
@@ -21,6 +22,10 @@ public class Fruit {
 		this.point=new Point3D(x,y,z);
 		this.id=id;
 		this.Weight=Weight;
+	}
+	
+	public String toString() {
+		return id+","+point.x()+","+point.y()+","+point.z()+","+Weight;
 	}
 	
 	

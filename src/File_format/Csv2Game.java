@@ -19,18 +19,19 @@ public class Csv2Game {
 		
 		String line=brf.readLine();
 		// the first two lines are headlines
-		line=brf.readLine();
+		//line=brf.readLine();
 		line=brf.readLine();
 		// open every line
 		while (line != null) 
 		{
-			System.out.println(line);
+			//System.out.println(line);
 			
 			if(line.charAt(0)=='P') {
 				Packman p=new Packman(line);
 				layer.addPac(p);
 			}
-			if(line.charAt(0)=='F') {
+			//if(line.charAt(0)=='F') {
+			else {
 				Fruit f=new Fruit(line);
 				layer.addFru(f);	
 			}
