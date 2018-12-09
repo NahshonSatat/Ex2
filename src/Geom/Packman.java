@@ -7,16 +7,17 @@ public class Packman  {
 	private double id;
 	private double speed;
 	private Point3D point; 
-//	public Packman() {
-//		point=new
-//	}
-	//}
+
 	public Packman(double lat,double lon,double alt,double speed,double id,double Radius) {
 		this.point=new Point3D(lat,lon,alt);
 		this.id=id;
 		this.speed=speed;
 		this.Radius=Radius;
 	}
+	public Packman(Packman p) {
+		
+	}
+	
 	public Packman(String line) {
 		String[] arr=line.split(",");
 		// getting the lat lont alt for the point
