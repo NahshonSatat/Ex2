@@ -24,6 +24,15 @@ public class Fruit {
 		this.Weight=Weight;
 	}
 	
+	public double GetId() {
+		return this.id;
+	}
+	public double GetWeight() {
+		return this.Weight;
+	}
+	public Point3D Getpoint() {
+		return this.point;
+	}
 	public String toString() {
 		return id+","+point.x()+","+point.y()+","+point.z()+","+Weight;
 	}

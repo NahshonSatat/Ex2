@@ -27,25 +27,27 @@ public class trying {
 //			System.out.println(s[i]);
 //		}
 //		br.close();
-		Game g=new Game("C:\\Users\\אליהו סתת\\Desktop\\game_1543684662657.csv");
-		
-		Iterator<Packman> it =g.getPackmans().iterator();
-		Packman temp_Packman ;
-			// run over all the layer
-			 while(it.hasNext()) {
-				 temp_Packman=(Packman)it.next();
-               System.out.println("p "+temp_Packman.toString());
-			 }
-		
-	
-	 Iterator<Fruit> it1 =g.getFruits().iterator();
-	  Fruit temp_Fruit ;
-		// run over all the layer
-		 while(it1.hasNext()) {
-			 temp_Fruit=(Fruit)it1.next();
-           System.out.println("f "+temp_Fruit.toString());
-			 //System.out.println(temp_Fruit.id);
-		 }
+		Game g=new Game("C:\\Users\\נחשון סתת\\Desktop\\game_1543684662657.csv");
+	    Game g1=new Game("C:\\Users\\נחשון סתת\\Desktop\\game_1543684662657.csv");
+	    Game g2=new Game("C:\\Users\\נחשון סתת\\Desktop\\game_1543684662657.csv");
+//		Iterator<Packman> it =g.getPackmans().iterator();
+//		Packman temp_Packman ;
+//			// run over all the layer
+//			 while(it.hasNext()) {
+//				 temp_Packman=(Packman)it.next();
+//               System.out.println("p "+temp_Packman.toString());
+//			 }
+//		
+//	
+//	 Iterator<Fruit> it1 =g.getFruits().iterator();
+//	  Fruit temp_Fruit ;
+//		// run over all the layer
+//		 while(it1.hasNext()) {
+//			 temp_Fruit=(Fruit)it1.next();
+//           System.out.println("f "+temp_Fruit.toString());
+//			 //System.out.println(temp_Fruit.id);
+//		 }
+		System.out.println(g.gametocsv());
 	
 }
 }

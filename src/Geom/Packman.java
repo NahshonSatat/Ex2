@@ -32,6 +32,20 @@ public class Packman  {
 		this.speed=speed;
 		this.Radius=radius;
 	}
+	
+	
+	public double GetId() {
+		return this.id;
+	}
+	public double GetRadius() {
+		return this.Radius;
+	}
+	public double Getspeed() {
+		return this.speed;
+	}
+	public Point3D Getpoint() {
+		return this.point;
+	}
 	public String toString() {
 		return id+","+point.x()+","+point.y()+","+point.z()+","+speed+","+Radius;
 	}
