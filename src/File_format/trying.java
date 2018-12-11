@@ -27,9 +27,9 @@ public class trying {
 //			System.out.println(s[i]);
 //		}
 //		br.close();
-		Game g=new Game("C:\\Users\\נחשון סתת\\Desktop\\game_1543684662657.csv");
-	    Game g1=new Game("C:\\Users\\נחשון סתת\\Desktop\\game_1543684662657.csv");
-	    Game g2=new Game("C:\\Users\\נחשון סתת\\Desktop\\game_1543684662657.csv");
+		Game g=new Game("C:\\Users\\אליהו סתת\\Desktop\\game_1543684662657.csv");
+	    //Game g1=new Game("C:\\Users\\נחשון סתת\\Desktop\\game_1543684662657.csv");
+	    //Game g2=new Game("C:\\Users\\נחשון סתת\\Desktop\\game_1543684662657.csv");
 //		Iterator<Packman> it =g.getPackmans().iterator();
 //		Packman temp_Packman ;
 //			// run over all the layer

@@ -14,9 +14,13 @@ public class Packman  {
 		this.speed=speed;
 		this.Radius=Radius;
 	}
-	public Packman(Packman p) {
-		
+	public Packman(double lat,double lon,double id) {
+		this.point=new Point3D(lat,lon,0);
+		this.id=id;
+		this.speed=1;
+		this.Radius=1;
 	}
+
 	
 	public Packman(String line) {
 		String[] arr=line.split(",");

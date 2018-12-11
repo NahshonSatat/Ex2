@@ -11,6 +11,11 @@ public class Fruit {
 		this.id=id;
 		this.Weight=Weight;
 	}
+	public Fruit(double lat,double lon,double id) {
+		this.point=new Point3D(lat,lon,0);
+		this.id=id;
+		this.Weight=1;
+	}
 	public Fruit(String line) {
 		String[] arr=line.split(",");
 		// getting the lat lont alt for the point

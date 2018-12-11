@@ -39,6 +39,10 @@ public class Game {
 	public ArrayList<Fruit> getFruits(){
 		return this.Fruits;
 	}
+	public void clear() {
+		Packmans.clear();
+		Fruits.clear();
+	}
 	
 	//gametocsv
 	public String gametocsv () {
