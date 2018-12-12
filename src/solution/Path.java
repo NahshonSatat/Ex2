@@ -2,7 +2,6 @@ package solution;
 
 import java.util.ArrayList;
 
-import GIS.My_Meta_data;
 import Geom.Point3D;
 
 public class Path {

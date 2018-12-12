@@ -7,7 +7,55 @@ public class MyCoords implements coords_converter{
 	 * This class has function on coordinate
 	 * @author eliahu satat , nashon satat
 	 */
+	private Point3D pixel1;
+	private Point3D pixel2;
+	private Point3D gps1;
+	private Point3D gps2;
+	private double p2g;
+	private double g2p;
 	
+	
+	public MyCoords(Point3D p1,Point3D p2,Point3D g1,Point3D g2) {
+		pixel1=new Point3D(p1);
+		pixel2=new Point3D(p2);
+		gps1=new Point3D(g1);
+		gps2=new Point3D(g2);
+		//double disPixels=regulardis(p1,p2);
+		//double disGps=distance2d(g1,g2);
+		double xPixels=p2.x()-p1.x();
+		Point3D a=new Point3D(g1.Gps2Meter1());
+		Point3D b=new Point3D(g2.Gps2Meter1());
+		double xGps=b.x()-a.x();
+		p2g=xPixels/xGps;
+		g2p=xGps/xPixels;
+	}
+	public MyCoords() {
+		pixel1=new Point3D(0,0,0);
+		pixel2=new Point3D(0,0,0);
+		gps1=new Point3D(0,0,0);
+		gps2=new Point3D(0,0,0);
+		p2g=0;
+		g2p=0;
+	}
+	
+	
+//	public Point3D p2g(Point3D pixels) {
+//		
+//		
+//	}
+	public Point3D gps2pix(Point3D gps) {
+		Point3D a = new Point3D(gps1.Gps2Meter1());
+		Point3D b = new Point3D(gps.Gps2Meter1());
+		Point3D v=vector3D(gps1,gps);
+		double bx=v.x();
+		double by=v.y();
+//		double bx=a.x()-b.x();
+//		double by=a.y()-b.y();
+		Point3D c = new Point3D(pixel1.x()-bx*g2p,pixel1.y()+by*g2p,0);
+		return c;
+		
+		
+	}
 	/*
 	 * only for test myself
 	public static void main(String[] args) {
@@ -19,6 +67,8 @@ public class MyCoords implements coords_converter{
 		System.out.println(md.distance2d(a,b));
 		
 	}
+	
+	
 	*/
 	
 	/** computes a new point which is the gps point transformed by a 3D vector (in meters)*/
@@ -31,6 +81,11 @@ public class MyCoords implements coords_converter{
 		// converting back to degree
 		Point3D gps2 = new Point3D(adding.meter2Gps1());
 		return gps2;
+	}
+	
+	public double regulardis(Point3D p1,Point3D p2) {
+		double dis=Math.sqrt(p1.x()*p2.x()+p1.y()+p2.y());
+		return dis;
 	}
 
 	/** computes the distance between two points 2d (in meters)

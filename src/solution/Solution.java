@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import Geom.Point3D;
 
 public class Solution {
-	private ArrayList<Path> MyPath;
+	private ArrayList<Path> Mysolution;
 	
-	public Solution() {
-		MyPath=new ArrayList<Path>();
-	}
-	
-	public void add(Path p) {
-		MyPath.add(p);
-	}
+    public Solution() {
+    	Mysolution=new ArrayList<Path>();
+    }
+    public void add(Path p) {
+    	Mysolution.add(p);
+    }
+
 }
+
