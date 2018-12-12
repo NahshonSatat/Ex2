@@ -86,7 +86,7 @@ public class MainWindow extends JFrame implements MouseListener
 		
 		try {
 			myImage = ImageIO.read(new File(map.getPath()));
-			// myImage = ImageIO.read(new File("C:\\Users\\אליהו סתת\\Desktop\\Ariel1.png"));
+			// myImage = ImageIO.read(new File("C:\\Users\\נחשון סתת\\Desktop\\Ariel1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		
@@ -129,8 +129,8 @@ public class MainWindow extends JFrame implements MouseListener
 	
 	//pixel->lat/lng:
 	public void Convert(Point3D f){
-		double x=f.x();
-		double y=f.y();
+		double x=f.y();
+		double y=f.x();
 		double lat=(y/(this.getHeight()/180)-90)/-1;
 		double lng = x/(this.getWidth()/360)-180;
 		System.out.println(x+","+y);
@@ -140,8 +140,8 @@ public class MainWindow extends JFrame implements MouseListener
 	}
 	
 	public void Convert2(Point3D f){
-		double lat=f.x();
-		double lng=f.y();
+		double lat=f.y();
+		double lng=f.x();
 		double y = Math.round(((-1 * lat) + 90) * (this.getHeight() / 180));
 		double x = Math.round((lng + 180) * (this.getWidth() / 360));
 		System.out.println(x+","+y);
@@ -162,16 +162,16 @@ public class MainWindow extends JFrame implements MouseListener
 	double yScale = mapHeight / (maxLat - minLat);
 
 	// position of map image for point
-	double x = (f.x() - minLong) * xScale;
-	double y = - (f.y() + minLat) * yScale;
+	double x = (f.y() - minLong) * xScale;
+	double y = - (f.x() + minLat) * yScale;
 
 	System.out.println("final coords: " + x + " " + y);
 	}
 	public void Convert4(Point3D f){
 		int mapWidth=1433;
 		int mapHeight=642;
-		double lng=f.x();
-		double lat=f.y();
+		double lng=f.y();
+		double lat=f.x();
 	// get x   
 	double x = (lng + 180) * (mapWidth / 360);
 	// convert from degrees to radians
