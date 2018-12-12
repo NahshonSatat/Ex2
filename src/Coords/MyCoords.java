@@ -22,12 +22,13 @@ public class MyCoords implements coords_converter{
 		gps2=new Point3D(g2);
 		//double disPixels=regulardis(p1,p2);
 		//double disGps=distance2d(g1,g2);
-		double xPixels=p2.x()-p1.x();
+		double xPixels=p2.x();
 		Point3D a=new Point3D(g1.Gps2Meter1());
 		Point3D b=new Point3D(g2.Gps2Meter1());
-		double xGps=b.x()-a.x();
-		p2g=xPixels/xGps;
-		g2p=xGps/xPixels;
+		double xmeters=b.x()-a.x();
+		double xgps=g1.x()-g2.x();
+		p2g=xPixels/xgps;
+		g2p=xgps/xPixels;
 	}
 	public MyCoords() {
 		pixel1=new Point3D(0,0,0);
@@ -44,14 +45,16 @@ public class MyCoords implements coords_converter{
 //		
 //	}
 	public Point3D gps2pix(Point3D gps) {
-		Point3D a = new Point3D(gps1.Gps2Meter1());
-		Point3D b = new Point3D(gps.Gps2Meter1());
-		Point3D v=vector3D(gps1,gps);
-		double bx=v.x();
-		double by=v.y();
-//		double bx=a.x()-b.x();
-//		double by=a.y()-b.y();
-		Point3D c = new Point3D(pixel1.x()-bx*g2p,pixel1.y()+by*g2p,0);
+		//Point3D a = new Point3D(gps1.Gps2Meter1());
+		//Point3D b = new Point3D(gps.Gps2Meter1());
+		//Point3D v=vector3D(gps1,gps);
+		//double bx=v.x();
+		//double by=-v.y();
+		double bx=gps1.x()-gps.x();
+		double by=gps.y()-gps1.y();
+		System.out.println(bx);
+		System.out.println(by);
+		Point3D c = new Point3D(bx*p2g,by*p2g,0);
 		return c;
 		
 		

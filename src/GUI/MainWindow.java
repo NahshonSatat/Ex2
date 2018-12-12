@@ -103,7 +103,7 @@ public class MainWindow extends JFrame implements MouseListener
 		ArrayList<Packman>p=gameP.getPackmans();
 		ArrayList<Fruit>f=gameP.getFruits();
 		g.drawImage(myImage, 0, 0,this.getWidth(),this.getHeight(), this);
-		
+		//System.out.println(this.getWidth()+","+this.getHeight());
 		 // print the Packmans
 		 Iterator<Packman> it1 =p.iterator();
 		 Packman temp_Packman ;
@@ -167,7 +167,22 @@ public class MainWindow extends JFrame implements MouseListener
 
 	System.out.println("final coords: " + x + " " + y);
 	}
-
+	public void Convert4(Point3D f){
+		int mapWidth=1433;
+		int mapHeight=642;
+		double lng=f.x();
+		double lat=f.y();
+	// get x   
+	double x = (lng + 180) * (mapWidth / 360);
+	// convert from degrees to radians
+	double latRad = lat * Math.PI / 180;
+	// get y value
+	double mercN = Math.log(Math.tan((Math.PI / 4) + (latRad / 2)));
+	double y = (mapHeight / 2) - (mapWidth * mercN / (2 * Math.PI));
+	System.out.println(x+","+y);
+	}
+	
+	
 	private Color randomColor() {
 		int r=(int)(Math.random()*50);
 		Color c=Color.white;
