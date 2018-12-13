@@ -18,6 +18,7 @@ import java.util.Iterator;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import Coords.convert;
 import Geom.Fruit;
 import Geom.Game;
 
@@ -32,14 +33,15 @@ public class MainWindow extends JFrame implements MouseListener
 	public Game gameP;
     public Map map;
 	public BufferedImage myImage;
-	
+	public convert m1;
 	// the constructor 
 	public MainWindow(Map map) 
 	{
 		this.map=map;
 		gameP=new Game();
 		initGUI();		
-		this.addMouseListener(this); 
+		this.addMouseListener(this);
+		 m1=new convert(1433,642,35.202306,32.105730,35.212407,32.101867);
 	}
 	
 	private void initGUI() 
@@ -57,9 +59,26 @@ public class MainWindow extends JFrame implements MouseListener
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-			System.out.println("game loaded");
+			System.out.println("game saved");
 			System.out.println(gameP.gametocsv());
 			gameP.clear();
+			repaint();
+			}
+			
+		});
+		
+		// the "load" action
+		item2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				gameP.clear();
+				try {
+					gameP.gametocsv("C:\\Users\\אליהו סתת\\Desktop\\game_1543684662657.csv");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			repaint();
 			}
 			
@@ -100,6 +119,7 @@ public class MainWindow extends JFrame implements MouseListener
 	
 	public void paint(Graphics g)
 	{
+		m1.setFrame(this.getWidth(), this.getHeight());
 		ArrayList<Packman>p=gameP.getPackmans();
 		ArrayList<Fruit>f=gameP.getFruits();
 		g.drawImage(myImage, 0, 0,this.getWidth(),this.getHeight(), this);
@@ -109,6 +129,9 @@ public class MainWindow extends JFrame implements MouseListener
 		 Packman temp_Packman ;
 			 while(it1.hasNext()) {
 				 temp_Packman=(Packman)it1.next();
+				 //System.out.println(temp_Packman);
+				 temp_Packman=m1.PacGps2Pix(temp_Packman);
+				// System.out.println(temp_Packman);
 				 g.setColor(Color.yellow);
 				 g.fillOval((int)temp_Packman.Getpoint().x(), (int)temp_Packman.Getpoint().y(), 20, 20);
 			 }
@@ -119,6 +142,7 @@ public class MainWindow extends JFrame implements MouseListener
 				// run over all the layer
 				 while(it2.hasNext()) {
 					 temp_Fruit=(Fruit)it2.next();
+					 temp_Fruit=m1.FruGps2Pix(temp_Fruit);
 					 g.setColor(Color.GREEN);
 					 //g.setColor(randomColor());
 					 g.fillOval((int)temp_Fruit.Getpoint().x(),(int) temp_Fruit.Getpoint().y(), 10, 10);
@@ -126,61 +150,7 @@ public class MainWindow extends JFrame implements MouseListener
 				 }
 	
 	}
-	
-	//pixel->lat/lng:
-	public void Convert(Point3D f){
-		double x=f.y();
-		double y=f.x();
-		double lat=(y/(this.getHeight()/180)-90)/-1;
-		double lng = x/(this.getWidth()/360)-180;
-		System.out.println(x+","+y);
-		//Fruit newFruit=new Fruit()
-		
-		
-	}
-	
-	public void Convert2(Point3D f){
-		double lat=f.y();
-		double lng=f.x();
-		double y = Math.round(((-1 * lat) + 90) * (this.getHeight() / 180));
-		double x = Math.round((lng + 180) * (this.getWidth() / 360));
-		System.out.println(x+","+y);
-		//Fruit newFruit=new Fruit()
-	}
-	public void Convert3(Point3D f){
-	double minLat = 32.101896;
-	double minLong = 35.202205;
-	double maxLat = 32.105381;
-	double maxLong = 35.212388;
 
-	// Map image size (in points)
-	double mapHeight = this.getHeight();
-	double mapWidth = this.getWidth();
-
-	// Determine the map scale (points per degree)
-	double xScale = mapWidth/ (maxLong - minLong);
-	double yScale = mapHeight / (maxLat - minLat);
-
-	// position of map image for point
-	double x = (f.y() - minLong) * xScale;
-	double y = - (f.x() + minLat) * yScale;
-
-	System.out.println("final coords: " + x + " " + y);
-	}
-	public void Convert4(Point3D f){
-		int mapWidth=1433;
-		int mapHeight=642;
-		double lng=f.y();
-		double lat=f.x();
-	// get x   
-	double x = (lng + 180) * (mapWidth / 360);
-	// convert from degrees to radians
-	double latRad = lat * Math.PI / 180;
-	// get y value
-	double mercN = Math.log(Math.tan((Math.PI / 4) + (latRad / 2)));
-	double y = (mapHeight / 2) - (mapWidth * mercN / (2 * Math.PI));
-	System.out.println(x+","+y);
-	}
 	
 	
 	private Color randomColor() {
@@ -213,7 +183,8 @@ public class MainWindow extends JFrame implements MouseListener
 		x = arg.getX();
 		y = arg.getY();
 		Packman p1=new Packman(x,y,gameP.getPackmans().size());
-		gameP.addPac(p1);
+		Packman p2=m1.PacPix2Gps(p1);
+		gameP.addPac(p2);
 		repaint();
 		}
 		//if left click add Fruit
@@ -221,7 +192,8 @@ public class MainWindow extends JFrame implements MouseListener
 			System.out.println("("+ arg.getX() + "," + arg.getY() +")");
 			x = arg.getX();
 			y = arg.getY();
-			Fruit p2=new Fruit(x,y,gameP.getFruits().size());
+			Fruit p1=new Fruit(x,y,gameP.getFruits().size());
+			Fruit p2=m1.FruPix2Gps(p1);
 			gameP.addFru(p2);
 			repaint();
 			}

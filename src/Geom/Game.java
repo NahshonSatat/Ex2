@@ -26,6 +26,12 @@ public class Game {
 		this.Packmans=g.getPackmans();
 		this.Fruits=g.getFruits();
 	}
+	public void gametocsv(String path) throws Exception {
+		Csv2Game c2g=new Csv2Game();
+		Game g=c2g.ReadFile(new File(path));
+		this.Packmans=g.getPackmans();
+		this.Fruits=g.getFruits();
+	}
 	
 	public void addPac(Packman p) {
 		Packmans.add(p);
