@@ -35,6 +35,37 @@ public class Test {
 		getPositionOnScreen(35.207475,32.102494);
 		getPositionOnScreen(35.202306,32.105730);
 		getPositionOnScreen(35.212407,32.101867);
+		getPoositionOnScreen(35.207475,32.102494);
+		//getPoositionOnScreen(35.202306,32.105730);
+		
+	}
+	
+
+	private static Point3D getPoositionOnScreen(double longitude, double latitude){
+	    double x,y;
+	   // double x1 =  (mapWidth*(x/mapLongitude));
+	   // double y1 =  (mapHeight*(y/mapLatitude));
+	    x=longitude - mapLongitudeStart;
+	   // System.out.println(x);
+	    // do inverse because the latitude increases as we go up but the y decreases as we go up.
+	    // if we didn't do the inverse then all the y values would be negative.
+	    y = mapLatitudeStart-latitude;
+	    //System.out.println(y);
+	    // set x & y using conversion
+	    double x1 = (int ) (mapWidth*(x/mapLongitude));
+	    double y1 = (int)  (mapHeight*(y/mapLatitude));
+	  //  x1=x1*mapWidth;
+	  //  y1=y1*mapHeight;
+        System.out.println(x1+","+ y1);
+        double  x2=x1/mapWidth;
+        double  y2=x1/mapHeight;
+        System.out.println(x2+","+ y2);
+
+	    
+	    
+	    
+	    
+	    return null;
 	}
 
 }
