@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Menu;
 import java.awt.MenuBar;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 import Coords.convert;
@@ -24,6 +26,7 @@ import Geom.Game;
 
 import Geom.Packman;
 import Geom.Point3D;
+import javafx.stage.FileChooser;
 
 
 
@@ -72,17 +75,32 @@ public class MainWindow extends JFrame implements MouseListener
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				gameP.clear();
+
+                JFileChooser fc = new JFileChooser();
+
+                int returnVal = fc.showOpenDialog(null);
+                fc.showOpenDialog(null);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File file = fc.getSelectedFile();
+                    if(!file.getAbsolutePath().contains(".csv")) {
+                    	System.out.println("this is not csv file!!!");
+                    }
+                    else {
+                    System.out.println("Opening: " + file.getAbsolutePath());
+				    gameP.clear();
 				try {
-					gameP.gametocsv("C:\\Users\\אליהו סתת\\Desktop\\game_1543684662657.csv");
+					gameP.gametocsv(file.getAbsolutePath());
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+                    }
 			repaint();
 			}
-			
+			}
 		});
+		
+		
+		
 		// the "new gameP" action
 		item4.addActionListener(new ActionListener() {
 
