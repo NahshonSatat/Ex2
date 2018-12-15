@@ -26,7 +26,7 @@ public class Game {
 		this.Packmans=g.getPackmans();
 		this.Fruits=g.getFruits();
 	}
-	public void gametocsv(String path) throws Exception {
+	public void csvtogame(String path) throws Exception {
 		Csv2Game c2g=new Csv2Game();
 		Game g=c2g.ReadFile(new File(path));
 		this.Packmans=g.getPackmans();
@@ -51,10 +51,10 @@ public class Game {
 	}
 	
 	//gametocsv
-	public String gametocsv () {
-		int r=(int)(Math.random()*10000);
+	public String gametocsv (String name) {
+		//int r=(int)(Math.random()*10000);
 	StringBuilder sb = new StringBuilder();
-	String fileName = "Save"+r+".csv";
+	String fileName = name+".csv";
 	PrintWriter pw = null;
 
 	try 

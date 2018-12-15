@@ -11,7 +11,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,6 +21,7 @@ import java.util.Iterator;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import Coords.convert;
 import Geom.Fruit;
@@ -59,11 +62,35 @@ public class MainWindow extends JFrame implements MouseListener
 		
 		// the "save" action
 		item1.addActionListener(new ActionListener() {
-
+        // acording to https://stackoverflow.com/questions/22261130/how-to-save-a-file-using-jfilechooser-showsavedialog
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-			System.out.println("game saved");
-			System.out.println(gameP.gametocsv());
+		        String filename = JOptionPane.showInputDialog("Name this file");
+		        JFileChooser savefile = new JFileChooser();
+		        savefile.setSelectedFile(new File(filename));
+		        savefile.showSaveDialog(savefile);
+		        int sf = savefile.showSaveDialog(null);
+		        if(sf == JFileChooser.APPROVE_OPTION){
+		          	
+		            	filename=""+savefile.getSelectedFile();
+
+		        	try {
+						gameP.gametocsv(filename);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		                JOptionPane.showMessageDialog(null, "File has been saved","File Saved",JOptionPane.INFORMATION_MESSAGE);
+		                // true for rewrite, false for override
+
+//		            } catch (IOException e) {
+//		                e.printStackTrace();
+//		            }
+		        }else if(sf == JFileChooser.CANCEL_OPTION){
+		            JOptionPane.showMessageDialog(null, "File save has been canceled");
+		        }
+			//System.out.println("game saved");
+			
 			gameP.clear();
 			repaint();
 			}
@@ -75,7 +102,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-
+        // according to https://stackoverflow.com/questions/18774652/how-to-use-jfilechooser-to-find-a-file-location
                 JFileChooser fc = new JFileChooser();
 
                 int returnVal = fc.showOpenDialog(null);
@@ -89,7 +116,7 @@ public class MainWindow extends JFrame implements MouseListener
                     System.out.println("Opening: " + file.getAbsolutePath());
 				    gameP.clear();
 				try {
-					gameP.gametocsv(file.getAbsolutePath());
+					gameP.csvtogame(file.getAbsolutePath());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
