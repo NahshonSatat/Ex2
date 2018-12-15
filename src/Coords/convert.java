@@ -10,6 +10,8 @@ public class convert {
 	double mapLatitudeStart;
 	double mapLongitude;
 	double mapLatitude;
+	// according to https://stackoverflow.com/questions/14329691/convert-latitude-longitude-point-to-a-pixels-x-y-on-mercator-projection
+	
 	
 	public convert(int mapWidth,int mapHeight,double mapLongitudeStart,double mapLatitudeStart,double mapLongitudeEnd,double mapLatitudeEnd) {
 		this.mapWidth=mapWidth;
@@ -59,6 +61,8 @@ public class convert {
 		this.mapHeight=mapHeight;
 		this.mapWidth=mapWidth;
 	}
+	
+	
 	public Fruit FruPix2Gps(Fruit f) {
 				double xPIX=f.Getpoint().x();
 	double yPIX=f.Getpoint().y();
@@ -76,6 +80,9 @@ public class convert {
     Fruit p1=new Fruit(y,x,f.Getpoint().z(),f.GetWeight(),f.GetId());
     return p1;
 	}
+	
+	
+	
 	public Fruit FruGps2Pix(Fruit f) {
 			    double x,y;
     x=f.Getpoint().y() - mapLongitudeStart;
