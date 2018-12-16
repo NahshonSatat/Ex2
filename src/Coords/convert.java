@@ -1,7 +1,9 @@
 package Coords;
 
 import Geom.Fruit;
+import Geom.Line;
 import Geom.Packman;
+import Geom.myLine;
 
 public class convert {
 	int mapWidth;
@@ -10,7 +12,7 @@ public class convert {
 	double mapLatitudeStart;
 	double mapLongitude;
 	double mapLatitude;
-	// according to https://stackoverflow.com/questions/14329691/convert-latitude-longitude-point-to-a-pixels-x-y-on-mercator-projection
+	// according to https://stackoverflow.com/questions/38748832/convert-longitude-and-latitude-coordinates-to-image-of-a-map-pixels-x-and-y-coor
 	
 	
 	public convert(int mapWidth,int mapHeight,double mapLongitudeStart,double mapLatitudeStart,double mapLongitudeEnd,double mapLatitudeEnd) {
@@ -56,6 +58,27 @@ public class convert {
        // System.out.println(p1);
         return p1;
 	}
+	
+	
+	public myLine LineGps2Pix(myLine l) {
+	    double sx,sy,ex,ey;
+	    sx=l.getStart().y() - mapLongitudeStart;
+	    ex=l.getEnd().y() - mapLongitudeStart;
+	   // System.out.println(x);
+	    // do inverse because the latitude increases as we go up but the y decreases as we go up.
+	    // if we didn't do the inverse then all the y values would be negative.
+	    sy = mapLatitudeStart-l.getStart().x();
+	    ey=  mapLatitudeStart-l.getEnd().x();
+	    //System.out.println(y);
+	    // set x & y using conversion
+	    int x1 = (int) (mapWidth*(sx/mapLongitude));
+	    int y1 = (int) (mapHeight*(sy/mapLatitude));
+	    int x2 = (int) (mapWidth*(ex/mapLongitude));
+	    int y2 = (int) (mapHeight*(ey/mapLatitude));
+	    myLine l1= new myLine(x1,y1,x2,y2);
+        return l1;
+	}
+
 	
 	public void setFrame(int mapWidth,int mapHeight) {
 		this.mapHeight=mapHeight;

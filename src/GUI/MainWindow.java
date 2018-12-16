@@ -23,12 +23,14 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import Algorithms.GameAlgorithem;
 import Coords.convert;
 import Geom.Fruit;
 import Geom.Game;
 
 import Geom.Packman;
 import Geom.Point3D;
+import Geom.myLine;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 
@@ -46,6 +48,7 @@ public class MainWindow extends JFrame implements MouseListener
 	{
 		this.map=map;
 		gameP=new Game();
+		
 		initGUI();		
 		this.addMouseListener(this);
 		 m1=new convert(1433,642,35.202306,32.105730,35.212407,32.101867);
@@ -127,6 +130,17 @@ public class MainWindow extends JFrame implements MouseListener
 			}
 		});
 		
+		// the "new gameP" action
+		item3.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				GameAlgorithem ga=new GameAlgorithem(gameP);
+				gameP=ga.GoAlgo();
+			    repaint();
+			}
+			
+		});
 		
 		
 		// the "new gameP" action
@@ -180,10 +194,16 @@ public class MainWindow extends JFrame implements MouseListener
 				// System.out.println(temp_Packman);
 				 g.setColor(Color.yellow);
 				 g.fillOval((int)temp_Packman.Getpoint().x(), (int)temp_Packman.Getpoint().y(), 20, 20);
+				 Iterator<myLine> it3 =temp_Packman.getPath().iterator();
+				 myLine temp_Line ;
+				 while(it3.hasNext()) {
+					 temp_Line=it3.next();
+					 temp_Line=m1.LineGps2Pix(temp_Line);
+					 g.drawLine(temp_Line.getStart().ix(), temp_Line.getEnd().ix(),temp_Line.getStart().iy(), temp_Line.getStart().iy());
+					 }
 			 }
-			 Line l=new  Line(0,0,10,10);
-			 g.setColor(Color.yellow);
-			 g.drawLine(0,0,100,100);
+
+			// g.drawLine(0,0.0,100,100);
 			 // print the fruits
 			 Iterator<Fruit> it2 =f.iterator();
 			 Fruit temp_Fruit ;
@@ -232,6 +252,8 @@ public class MainWindow extends JFrame implements MouseListener
 		y = arg.getY();
 		Packman p1=new Packman(x,y,gameP.getPackmans().size());
 		Packman p2=m1.PacPix2Gps(p1);
+		myLine l=new  myLine(0,0,10,10);
+		p2.add2Path(l);
 		gameP.addPac(p2);
 		repaint();
 		}

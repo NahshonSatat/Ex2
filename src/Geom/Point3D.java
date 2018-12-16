@@ -42,7 +42,13 @@ public class Point3D implements Geom_element, Serializable
 	public int ix() {return (int)_x;}
 	public int iy() {return (int)_y;}
 	public int iz() {return (int)_z;}
-		
+	public void SetX(double x) {};
+	public void SetP(Point3D p) 
+	{
+		_x=p.x();
+		_y=p.y();
+		_z=p.z();
+	}
 	public void add(Point3D p) { add(p._x,p._y,p._z);}
 	public void add(double dx, double dy, double dz) {
 			_x+=dx;_y+=dy;_z+=dz;
