@@ -6,6 +6,7 @@ import Coords.MyCoords;
 import Coords.convert;
 import Geom.Packman;
 import Geom.Point3D;
+import javafx.scene.shape.Line;
 
 
 public class Main 
@@ -30,6 +31,7 @@ public class Main
 		Packman t4=new Packman(850,128,1);
 		convert m1=new convert(1433,642,35.202306,32.105730,35.212407,32.101867);
 		m1.PacGps2Pix(t3);
+		Line l=new  Line(0,0,10,10);
 		//m1.PacPix2Gps(t4);
 		//System.out.println(m1.gps2pix(t2));
 		//Point3D t2=new Point3D(32.102498,35.207475);

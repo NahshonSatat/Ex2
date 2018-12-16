@@ -29,6 +29,7 @@ import Geom.Game;
 
 import Geom.Packman;
 import Geom.Point3D;
+import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 
 
@@ -180,7 +181,9 @@ public class MainWindow extends JFrame implements MouseListener
 				 g.setColor(Color.yellow);
 				 g.fillOval((int)temp_Packman.Getpoint().x(), (int)temp_Packman.Getpoint().y(), 20, 20);
 			 }
-			 
+			 Line l=new  Line(0,0,10,10);
+			 g.setColor(Color.yellow);
+			 g.drawLine(0,0,100,100);
 			 // print the fruits
 			 Iterator<Fruit> it2 =f.iterator();
 			 Fruit temp_Fruit ;
