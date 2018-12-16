@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Iterator;
 
 import Coords.MyCoords;
+import Coords.convert;
 import Geom.Fruit;
 import Geom.Game;
 import Geom.Line;
@@ -11,6 +12,10 @@ import Geom.Packman;
 import Geom.myLine;
 
 public class GameAlgorithem {
+	public static void main(String[] args)
+	{
+		
+	}
 	  
 	private Game game;
 	public GameAlgorithem(Game g) {
@@ -18,23 +23,27 @@ public class GameAlgorithem {
 	}
 	
 	public Game GoAlgo() {
-		int i=0;
-		while(!game.getFruits().isEmpty()) {
-			firstPackGo();
-			System.out.println(i);
-			i++;
+		if(game.getFruits().isEmpty()) {
+			System.out.println("no fruit!");
+			 return this.game;
 		}
-		System.out.println("done!!");
-	   return this.game;
-		
-	}
+		else {
+		while(!(game.getFruits().isEmpty())) {
+			firstPackGo();
+		}
+			System.out.println("done!!");
+			   return this.game;
+		}
+
+		}
+
 	
 	public double time(Packman p,Fruit f) {
 		MyCoords md=new MyCoords();
 		double time= 0;
 		double road= 0;
 		road= md.distance3d(p.Getpoint(),f.Getpoint());
-		time=road*p.Getspeed();
+		time=road/p.Getspeed();
 		return time;
 	    }
 	
@@ -68,13 +77,20 @@ public class GameAlgorithem {
                     	 near_Time=temp_time;
                      }
 				 }
+				 System.out.println("the near pack is: "+near_Packman.GetId());
 				 near_Packman= game.getPackmans().get((int) near_Packman.GetId());
 				 Fruit near_Fruit=game.getFruits().get((int)firstFruitId(near_Packman));
+				 System.out.println("the near fruit is: "+near_Fruit.GetId());
 				 near_Packman.setTime(near_Time);
 				 myLine l=new myLine(near_Packman.Getpoint(),near_Fruit.Getpoint());
+				 System.out.println("the new line:"+l);
+				 convert m1=new convert(1433,642,35.202306,32.105730,35.212407,32.101867);
+				 myLine l1=m1.LineGps2Pix(l);
+				 System.out.println("the new line pixels:"+l1);
 				 near_Packman.add2Path(l);
+				 System.out.println("the num of line of this pack: "+near_Packman.getPath().size());
 				 near_Packman.setPosition(near_Fruit.Getpoint());
-				 game.getFruits().remove(near_Fruit.GetId());
+				 game.removeFbyId((int)near_Fruit.GetId());
 	   }
 
 

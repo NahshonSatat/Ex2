@@ -1,5 +1,7 @@
 package GUI;
 
+import java.io.IOException;
+
 import javax.swing.JFrame;
 
 import Coords.MyCoords;
@@ -11,7 +13,7 @@ import javafx.scene.shape.Line;
 
 public class Main 
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
 		Point3D g1=new Point3D(32.103506,35.207834);
 		Point3D p2=new Point3D(912,388,0);

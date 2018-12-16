@@ -20,5 +20,9 @@ public class myLine {
 	public Point3D getEnd() {
 		return end;
 	}
+	public String toString() {
+		String s="x1: "+start.x()+"y1: "+start.y()+"x2: "+end.x()+"y2: "+end.y();
+		return s;
+	}
 	
 }

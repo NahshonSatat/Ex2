@@ -3,6 +3,7 @@ package GUI;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Menu;
 import java.awt.MenuBar;
 import java.awt.MenuItem;
@@ -39,18 +40,23 @@ import javafx.stage.FileChooser;
 
 public class MainWindow extends JFrame implements MouseListener
 {
+	private static final ImageIO ImegeIO = null;
 	public Game gameP;
     public Map map;
 	public BufferedImage myImage;
 	public convert m1;
+	public Image p1;
+	public Image f1;
 	// the constructor 
-	public MainWindow(Map map) 
+	public MainWindow(Map map) throws IOException 
 	{
 		this.map=map;
 		gameP=new Game();
-		
+		File pacFile = new File("C:\\Users\\אליהו סתת\\Downloads\\1.png");
+		p1=ImageIO.read(pacFile);
 		initGUI();		
 		this.addMouseListener(this);
+		
 		 m1=new convert(1433,642,35.202306,32.105730,35.212407,32.101867);
 	}
 	
@@ -63,6 +69,7 @@ public class MainWindow extends JFrame implements MouseListener
 		Menu menu1 = new Menu("game"); 
 		MenuItem item3 = new MenuItem("run");
 		MenuItem item4 = new MenuItem("new game");
+		
 		
 		// the "save" action
 		item1.addActionListener(new ActionListener() {
@@ -193,12 +200,18 @@ public class MainWindow extends JFrame implements MouseListener
 				 temp_Packman=m1.PacGps2Pix(temp_Packman);
 				// System.out.println(temp_Packman);
 				 g.setColor(Color.yellow);
-				 g.fillOval((int)temp_Packman.Getpoint().x(), (int)temp_Packman.Getpoint().y(), 20, 20);
+				 
+				g.drawImage(p1, (int)temp_Packman.Getpoint().x(),  (int)temp_Packman.Getpoint().y(), 20, 20,this);
+				// g.fillOval((int)temp_Packman.Getpoint().x(), (int)temp_Packman.Getpoint().y(), 20, 20);
+				System.out.println("packman");
+				System.out.println("his line: "+temp_Packman.getPath().size());
 				 Iterator<myLine> it3 =temp_Packman.getPath().iterator();
 				 myLine temp_Line ;
 				 while(it3.hasNext()) {
 					 temp_Line=it3.next();
+					 System.out.println("line draw!");
 					 temp_Line=m1.LineGps2Pix(temp_Line);
+					 
 					 g.drawLine(temp_Line.getStart().ix(), temp_Line.getEnd().ix(),temp_Line.getStart().iy(), temp_Line.getStart().iy());
 					 }
 			 }

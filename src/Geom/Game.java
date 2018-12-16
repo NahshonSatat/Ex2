@@ -1,5 +1,6 @@
 package Geom;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -35,6 +36,17 @@ public class Game {
 	
 	public void addPac(Packman p) {
 		Packmans.add(p);
+	}
+	public void removeFbyId(int id) {
+		 Iterator<Fruit> it2 =Fruits.iterator();
+		 Fruit temp_Fruit ;
+			
+			 while(it2.hasNext()) {
+				 temp_Fruit=(Fruit)it2.next();
+				 if(temp_Fruit.GetId()==id) {
+					 it2.remove();
+				 }
+			 }
 	}
 	public void addFru(Fruit f) {
 		Fruits.add(f);
