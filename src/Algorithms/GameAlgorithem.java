@@ -31,6 +31,12 @@ public class GameAlgorithem {
 		while(!(game.getFruits().isEmpty())) {
 			firstPackGo();
 		}
+		 Iterator<Packman> it1 =game.getPackmans().iterator();
+		 Packman temp_Packman ;
+			 while(it1.hasNext()) {
+				 temp_Packman=(Packman)it1.next();
+	         System.out.println("packman id: "+temp_Packman.GetId()+" num of his line "+temp_Packman.getPath().size());
+			 }
 			System.out.println("done!!");
 			   return this.game;
 		}
@@ -86,9 +92,11 @@ public class GameAlgorithem {
 				 System.out.println("the new line:"+l);
 				 convert m1=new convert(1433,642,35.202306,32.105730,35.212407,32.101867);
 				 myLine l1=m1.LineGps2Pix(l);
-				 System.out.println("the new line pixels:"+l1);
+				 //System.out.println("the new line pixels:"+l1);
 				 near_Packman.add2Path(l);
-				 System.out.println("the num of line of this pack: "+near_Packman.getPath().size());
+				 System.out.println("the line enter "+l);
+				 System.out.println("num of line "+near_Packman.getPath().size());
+				 //System.out.println("the num of line of this pack: "+near_Packman.getPath().size());
 				 near_Packman.setPosition(near_Fruit.Getpoint());
 				 game.removeFbyId((int)near_Fruit.GetId());
 	   }

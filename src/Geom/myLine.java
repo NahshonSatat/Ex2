@@ -21,7 +21,7 @@ public class myLine {
 		return end;
 	}
 	public String toString() {
-		String s="x1: "+start.x()+"y1: "+start.y()+"x2: "+end.x()+"y2: "+end.y();
+		String s="x1: "+start.x()+" y1: "+start.y()+" x2: "+end.x()+" y2: "+end.y();
 		return s;
 	}
 	

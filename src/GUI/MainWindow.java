@@ -200,11 +200,11 @@ public class MainWindow extends JFrame implements MouseListener
 				 temp_Packman=m1.PacGps2Pix(temp_Packman);
 				// System.out.println(temp_Packman);
 				 g.setColor(Color.yellow);
-				 
+				 System.out.println("packman "+temp_Packman.GetId()+"lines "+temp_Packman.getPath().size());
 				g.drawImage(p1, (int)temp_Packman.Getpoint().x(),  (int)temp_Packman.Getpoint().y(), 20, 20,this);
 				// g.fillOval((int)temp_Packman.Getpoint().x(), (int)temp_Packman.Getpoint().y(), 20, 20);
-				System.out.println("packman");
-				System.out.println("his line: "+temp_Packman.getPath().size());
+				//System.out.println("packman");
+				//System.out.println("his line: "+temp_Packman.getPath().size());
 				 Iterator<myLine> it3 =temp_Packman.getPath().iterator();
 				 myLine temp_Line ;
 				 while(it3.hasNext()) {
