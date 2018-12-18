@@ -3,6 +3,7 @@ package Geom;
 import java.util.ArrayList;
 
 import GIS.My_Meta_data;
+import javafx.scene.shape.Line;
 
 public class Packman  {
 	private double Radius;
@@ -10,7 +11,7 @@ public class Packman  {
 	private double speed;
 	private Point3D point;
 	private double time;
-	private ArrayList<myLine> path; 
+	private ArrayList<Line> path; 
 
 	public Packman(double lat,double lon,double alt,double speed,double id,double Radius) {
 		this.point=new Point3D(lat,lon,alt);
@@ -18,7 +19,7 @@ public class Packman  {
 		this.speed=speed;
 		this.Radius=Radius;
 		this.time=0;
-		path=new ArrayList<myLine>();
+		path=new ArrayList<Line>();
 	}
 	public Packman(double lat,double lon,double id) {
 		this.point=new Point3D(lat,lon,0);
@@ -26,7 +27,7 @@ public class Packman  {
 		this.speed=1;
 		this.Radius=1;
 		this.time=0;
-		path=new ArrayList<myLine>();
+		path=new ArrayList<Line>();
 	}
 
 	
@@ -44,7 +45,7 @@ public class Packman  {
 		this.speed=speed;
 		this.Radius=radius;
 		this.time=0;
-		path=new ArrayList<myLine>();
+		path=new ArrayList<Line>();
 	}
 	
 	
@@ -60,12 +61,13 @@ public class Packman  {
 		this.speed=speed;
 		this.Radius=radius;
 		this.time=packman.GetTime();
-		path=new ArrayList<myLine>();
+		path=new ArrayList<Line>();
 	}
+	
 	public double GetId() {
 		return this.id;
 	}
-	public ArrayList<myLine> GetPath() {
+	public ArrayList<Line> GetPath() {
 		return this.path;
 	}
 	public double GetTime() {
@@ -89,11 +91,15 @@ public class Packman  {
 	public void setPosition(Point3D p) {
 		this.point.SetP(p);
 	}
-	public void add2Path(myLine l) {
+	public void add2Path(Line l) {
 		 this.path.add(l);
 	}
-	public ArrayList<myLine> getPath() {
+	public ArrayList<Line> getPath() {
 		return this.path;
+	}
+	public void setId(int size) {
+		this.id=size;
+		
 	}
 	
 }

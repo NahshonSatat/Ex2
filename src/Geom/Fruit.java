@@ -43,6 +43,10 @@ public class Fruit {
 	public String toString() {
 		return id+","+point.x()+","+point.y()+","+point.z()+","+Weight;
 	}
+
+	public void setId(int size) {
+		this.id=size;
+	}
 	
 	
 

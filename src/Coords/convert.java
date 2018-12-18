@@ -1,9 +1,9 @@
 package Coords;
 
 import Geom.Fruit;
-import Geom.Line;
 import Geom.Packman;
 import Geom.myLine;
+import javafx.scene.shape.Line;
 
 public class convert {
 	int mapWidth;
@@ -60,22 +60,23 @@ public class convert {
 	}
 	
 	
-	public myLine LineGps2Pix(myLine l) {
+	public Line LineGps2Pix(Line l) {
 	    double sx,sy,ex,ey;
-	    sx=l.getStart().y() - mapLongitudeStart;
-	    ex=l.getEnd().y() - mapLongitudeStart;
+	    
+	    sx=l.getStartY() - mapLongitudeStart;
+	    ex=l.getEndY() - mapLongitudeStart;
 	   // System.out.println(x);
 	    // do inverse because the latitude increases as we go up but the y decreases as we go up.
 	    // if we didn't do the inverse then all the y values would be negative.
-	    sy = mapLatitudeStart-l.getStart().x();
-	    ey=  mapLatitudeStart-l.getEnd().x();
+	    sy = mapLatitudeStart-l.getStartX();
+	    ey=  mapLatitudeStart-l.getEndX();
 	    //System.out.println(y);
 	    // set x & y using conversion
 	    int x1 = (int) (mapWidth*(sx/mapLongitude));
 	    int y1 = (int) (mapHeight*(sy/mapLatitude));
 	    int x2 = (int) (mapWidth*(ex/mapLongitude));
 	    int y2 = (int) (mapHeight*(ey/mapLatitude));
-	    myLine l1= new myLine(x1,y1,x2,y2);
+	    Line l1= new Line(x1,y1,x2,y2);
         return l1;
 	}
 

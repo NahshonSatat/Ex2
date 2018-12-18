@@ -8,15 +8,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import File_format.Csv2Game;
+import javafx.scene.shape.Line;
+import solution.Solution;
 
 
 public class Game {
 	private ArrayList<Packman> Packmans;
 	private ArrayList<Fruit> Fruits;
+	private Solution solu;
 	
 	public Game() {
 		Packmans=new ArrayList<Packman>();
 		Fruits=new ArrayList<Fruit>();
+		solu=new Solution();
 	
 	}
 	
@@ -26,6 +30,7 @@ public class Game {
 		Game g=c2g.ReadFile(new File(path));
 		this.Packmans=g.getPackmans();
 		this.Fruits=g.getFruits();
+		solu=new Solution();
 	}
 	public void csvtogame(String path) throws Exception {
 		Csv2Game c2g=new Csv2Game();
@@ -35,6 +40,7 @@ public class Game {
 	}
 	
 	public void addPac(Packman p) {
+		p.setId(this.Packmans.size());
 		Packmans.add(p);
 	}
 	public void removeFbyId(int id) {
@@ -49,6 +55,7 @@ public class Game {
 			 }
 	}
 	public void addFru(Fruit f) {
+		f.setId(this.Fruits.size());
 		Fruits.add(f);
 	}
 	public ArrayList<Packman> getPackmans(){
@@ -57,9 +64,13 @@ public class Game {
 	public ArrayList<Fruit> getFruits(){
 		return this.Fruits;
 	}
+	public Solution getSolution(){
+		return this.solu;
+	}
 	public void clear() {
 		Packmans.clear();
 		Fruits.clear();
+		solu.clear();
 	}
 	
 	//gametocsv
@@ -140,6 +151,10 @@ public class Game {
 	System.out.println("done!");
 	return fileName;
 }
+
+	public void addPath2Solution(ArrayList<Line> getPath) {
+     this.solu.add(getPath);		
+	}
 	
 	
 
