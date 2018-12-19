@@ -14,6 +14,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import javax.swing.JOptionPane;
 
 import Algorithms.GameAlgorithem;
 import Coords.convert;
+import File_format.Path2Kml;
 import Geom.Fruit;
 import Geom.Game;
 
@@ -74,6 +76,7 @@ public class MainWindow extends JFrame implements MouseListener
 		MenuItem item3 = new MenuItem("run");
 		MenuItem item4 = new MenuItem("new game");
 		MenuItem item5 = new MenuItem("play");
+		MenuItem item6 = new MenuItem("toKml");
 
 
 		// the "save" action
@@ -163,13 +166,13 @@ public class MainWindow extends JFrame implements MouseListener
 				}
 				//////////////////////////////
 				repaint();
-				run=false;
+				//run=false;
 			}
 
 		});
 
 
-		// the "new gameP" action
+		// the "new game" action
 		item4.addActionListener(new ActionListener() {
 
 			@Override
@@ -196,11 +199,29 @@ public class MainWindow extends JFrame implements MouseListener
 
 
 			}});
+		// the "play" action
+		item6.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				play=true;
+				GameAlgorithem ga=new GameAlgorithem(gameP);
+				ga.GoAlgo();
+				Path2Kml kml=new Path2Kml(gameP);
+				try {
+					kml.tokml();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}});
 		menu.add(item1);
 		menu.add(item2);
 		menu1.add(item3);
 		menu1.add(item4);
 		menu1.add(item5);
+		menu1.add(item6);
 		menuBar.add(menu);
 		menuBar.add(menu1);
 
@@ -233,7 +254,7 @@ public class MainWindow extends JFrame implements MouseListener
 		while(it1.hasNext()) {
 			temp_Packman=(Packman)it1.next();
 			if(play) {
-				System.out.println(temp_Packman.GetPathpoint());
+				//System.out.println(temp_Packman.GetPathpoint());
 				Iterator<PathPoint> it10 =temp_Packman.GetPathpoint().iterator();
 				PathPoint temp_Pathpoint;
 				while(it10.hasNext()) {
@@ -251,19 +272,21 @@ public class MainWindow extends JFrame implements MouseListener
 			//System.out.println("packman "+temp_Packman.GetId()+"lines "+temp_Packman.getPath().size());
 			//g.drawImage(p1, (int)temp_Packman.Getpoint().x(),  (int)temp_Packman.Getpoint().y(), 20, 20,this);
 			g.fillOval((int)temp_Packman.Getpoint().x(), (int)temp_Packman.Getpoint().y(), 20, 20);
-			System.out.println("the packman syso anagin!");
+			//System.out.println("the packman syso anagin!");
 			//System.out.println("packman");
 			//System.out.println("his line: "+temp_Packman.getPath().size());
 			// Iterator<myLine> it3 =temp_Packman.getPath().iterator();
+			if(run) {
 			Iterator<Line> it3 =temp_Packman.getPath().iterator();
 			Line temp_Line ;
 			while(it3.hasNext()) {
 				temp_Line=it3.next();
-				System.out.println("line draw!");
+				//System.out.println("line draw!");
 				//temp_Line=m1.LineGps2Pix(temp_Line);
-				g.setColor(Color.yellow);
+				g.setColor(Color.black);
 				g.drawLine((int)temp_Line.getStartX(),(int)temp_Line.getStartY(),(int)temp_Line.getEndX(),(int)temp_Line.getEndY());
-
+			  run=false;
+			}
 				//g.drawLine(temp_Line.getStart().ix(), temp_Line.getEnd().ix(),temp_Line.getStart().iy(), temp_Line.getStart().iy());
 			}
 
@@ -273,22 +296,19 @@ public class MainWindow extends JFrame implements MouseListener
 		// print the fruits
 		Iterator<Fruit> it2 =f.iterator();
 		Fruit temp_Fruit ;
-		// run over all the layer
+		// run over all the fruits
 		while(it2.hasNext()) {
 			temp_Fruit=(Fruit)it2.next();
 			temp_Fruit=m1.FruGps2Pix(temp_Fruit);
 			g.setColor(Color.GREEN);
-			//g.setColor(randomColor());
 			g.fillOval((int)temp_Fruit.Getpoint().x(),(int) temp_Fruit.Getpoint().y(), 10, 10);
 
 		}
-		System.out.println("the num of solu:"+gameP.getSolution().size());
+		
 		Iterator<ArrayList<Line> > it7=gameP.getSolution().iterator();
 		ArrayList<Line> temp_Solu ;
 		while(it7.hasNext()) {
 			temp_Solu=it7.next();
-			System.out.println("the num of his line:"+temp_Solu.size());
-			//System.out.println("his line: "+temp_Solu.get(0));
 			Iterator<Line> it8=temp_Solu.iterator();
 			Line templ;
 			g.setColor(Color.yellow);
@@ -299,7 +319,6 @@ public class MainWindow extends JFrame implements MouseListener
 
 			}
 
-			System.out.println("in the run");
 		}
 
 	}
@@ -341,25 +360,34 @@ public class MainWindow extends JFrame implements MouseListener
 		}
 		return c;
 	}
+	public int maxrun() {
+		int maxnum=0;
+		Iterator<Packman> it1 =gameP.getPackmans().iterator();
+		Packman temp_Packman ;
+		while(it1.hasNext()) {
+			temp_Packman=(Packman)it1.next();
+			if(temp_Packman.GetPathpoint().size()>maxnum) {
+				maxnum=temp_Packman.GetPathpoint().size();
+			}
+		}
+		return maxnum;
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg) {
 		//if right click add Packman
 		if(arg.getButton()==1) {
-			System.out.println("mouse Clicked");
-			System.out.println("("+ arg.getX() + "," + arg.getY() +")");
+			//System.out.println("mouse Clicked");
+			//System.out.println("("+ arg.getX() + "," + arg.getY() +")");
 			x = arg.getX();
 			y = arg.getY();
 			Packman p1=new Packman(x,y,gameP.getPackmans().size());
 			Packman p2=m1.PacPix2Gps(p1);
-			//myLine l=new  myLine(0,0,10,10);
-			//p2.add2Path(l);
 			gameP.addPac(p2);
 			repaint();
 		}
 		//if left click add Fruit
 		if(arg.getButton()==3) {
-			System.out.println("("+ arg.getX() + "," + arg.getY() +")");
 			x = arg.getX();
 			y = arg.getY();
 			Fruit p1=new Fruit(x,y,gameP.getFruits().size());
@@ -397,9 +425,6 @@ public class MainWindow extends JFrame implements MouseListener
 	}
 
 	public class PlayThread extends Thread{
-
-
-
 		@Override
 		public void run() 
 		{
@@ -408,37 +433,29 @@ public class MainWindow extends JFrame implements MouseListener
 			double y = 0;
 			double z = 0;
 			double numofp=gameP.getPackmans().size();
-
-
-			while(i<10000) {
+			while(i<maxrun()) {
 				for (int j = 0; j < numofp; j++) {
-					
+					if(!(i>=gameP.getPackmans().get(j).GetPathpoint().size())) {
+
 						x=gameP.getPackmans().get(j).GetPathpoint().get(i).x();
 						y=gameP.getPackmans().get(j).GetPathpoint().get(i).y();
 						z=gameP.getPackmans().get(j).GetPathpoint().get(i).z();
 						gameP.getPackmans().get(j).setPosition(x,y,z);
-						//System.out.println(gameP.getPackmans().get(0));
+						System.out.println(i);
+						System.out.println(gameP.getPackmans().get(j).GetPathpoint().get(i).getTime());
 						try {
 							Thread.sleep(5);
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					
+					}
+
 				}
 				repaint();
-				//System.out.println(i);
 				i++;
 			}
 
 		}
-
-
-
-
-
-
-
 
 	}
 

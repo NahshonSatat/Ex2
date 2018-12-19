@@ -7,12 +7,12 @@ import Geom.myLine;
 import javafx.scene.shape.Line;
 
 public class convert {
-	int mapWidth;
-	int mapHeight;
-	double mapLongitudeStart;
-	double mapLatitudeStart;
-	double mapLongitude;
-	double mapLatitude;
+	private int mapWidth;
+	private int mapHeight;
+	private double mapLongitudeStart;
+	private double mapLatitudeStart;
+	private double mapLongitude;
+	private double mapLatitude;
 	// according to https://stackoverflow.com/questions/38748832/convert-longitude-and-latitude-coordinates-to-image-of-a-map-pixels-x-and-y-coor
 	
 	

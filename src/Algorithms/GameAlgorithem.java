@@ -40,11 +40,8 @@ public class GameAlgorithem {
 				 game.addPath2Solution(temp_Packman.GetPath());
 				 if(temp_Packman.GetTime()>algotime)
 					 algotime= temp_Packman.GetTime();
-	         System.out.println("packman id: "+temp_Packman.GetId()+" num of his line "+temp_Packman.getPath().size());
 			 }
-			 System.out.println("in the algo");
 			 System.out.println("the algo time is: "+algotime);
-			   //return this.game;
 		}
 
 		}
@@ -108,14 +105,8 @@ public class GameAlgorithem {
 				 line.setStartY(near_Packman.Getpoint().y());
 				 line.setEndX(near_Fruit.Getpoint().x());
 				 line.setEndY(near_Fruit.Getpoint().y());
-				 //System.out.println("the new line:"+line);
 				 convert m1=new convert(1433,642,35.202306,32.105730,35.212407,32.101867);
-				 //myLine l1=m1.LineGps2Pix(l);
-				 //System.out.println("the new line pixels:"+l1);
 				 near_Packman.add2Path(line);
-				 //System.out.println("the line enter "+line);
-				 //System.out.println("num of line "+near_Packman.getPath().size());
-				 //System.out.println("the num of line of this pack: "+near_Packman.getPath().size());
 				 addToPointPath(near_Packman,near_Fruit);
 				 near_Packman.setPosition(near_Fruit.Getpoint());
 				 game.removeFbyId((int)near_Fruit.GetId());
@@ -125,11 +116,25 @@ public class GameAlgorithem {
 		   MyCoords md=new MyCoords();
 		   double distance  =md.distance2d(p.Getpoint(), f.Getpoint());
 		   double speed = p.Getspeed();
-		   double pointTime=p.GetTime();
+		   //////////////////////////////////////////////
+		  // double pointTime=p.GetPathpoint().get(p.GetPathpoint().size()-1).getTime();
+		   double pointTime=0;
 		   double numOfPoint=distance/speed;
+		   int i=0;
+		   while(i<numOfPoint) {
+			   distance=md.distance3d(p.Getpoint(), f.Getpoint());
+			   Point3D vector=md.vector3D(p.Getpoint(), f.Getpoint());
+			   vector=new Point3D(vector.x()/numOfPoint,vector.y()/numOfPoint);
+			   Point3D temp=md.add(p.Getpoint(), vector);
+			   pointTime=pointTime+1;
+			   PathPoint pp=new PathPoint(temp,pointTime) ;
+			   p.add2Pathpoint(pp);
+			   p.setPosition(temp);
+			   i++;
+		   }
+		   distance  =md.distance2d(p.Getpoint(), f.Getpoint());
+		   numOfPoint=distance/speed;
 		   while(md.distance2d(p.Getpoint(), f.Getpoint())>1) {
-				
-			
 		   distance=md.distance3d(p.Getpoint(), f.Getpoint());
 		   Point3D vector=md.vector3D(p.Getpoint(), f.Getpoint());
 		   vector=new Point3D(vector.x()/numOfPoint,vector.y()/numOfPoint);

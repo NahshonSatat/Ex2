@@ -5,5 +5,11 @@
 	<classpathentry kind="lib" path="json-simple-1.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/אליהו סתת/eclipse-workspace/Ex2/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/אליהו סתת/eclipse-workspace/Ex2/JavaAPIforKml-2.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/אליהו סתת/eclipse-workspace/Ex2/jaxb-api-2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/אליהו סתת/eclipse-workspace/Ex2/jaxb-impl-2.1.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/אליהו סתת/eclipse-workspace/Ex2/jaxb-xjc-2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/אליהו סתת/eclipse-workspace/Ex2/stax-api-1.0-2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
