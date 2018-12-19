@@ -30,8 +30,10 @@ import Geom.Fruit;
 import Geom.Game;
 
 import Geom.Packman;
+import Geom.PathPoint;
 import Geom.Point3D;
 import Geom.myLine;
+import Threads.PlayThread;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 
@@ -41,12 +43,15 @@ import javafx.stage.FileChooser;
 public class MainWindow extends JFrame implements MouseListener
 {
 	private static final ImageIO ImegeIO = null;
-	public Game gameP;
-	public Map map;
+	private Game gameP;
+	private Map map;
+	//////////////// Change to private!!!!!!!!!!!!!!!!
 	public BufferedImage myImage;
-	public convert m1;
-	public Image p1;
-	public Image f1;
+	private convert m1;
+	private Image p1;
+	private Image f1;
+	private boolean run=false;
+	private boolean play=false;
 	// the constructor 
 	public MainWindow(Map map) throws IOException 
 	{
@@ -68,6 +73,7 @@ public class MainWindow extends JFrame implements MouseListener
 		Menu menu1 = new Menu("game"); 
 		MenuItem item3 = new MenuItem("run");
 		MenuItem item4 = new MenuItem("new game");
+		MenuItem item5 = new MenuItem("play");
 
 
 		// the "save" action
@@ -142,6 +148,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				run=true;
 				GameAlgorithem ga=new GameAlgorithem(gameP);
 				ga.GoAlgo();
 				//gameP=ga.GoAlgo();
@@ -156,6 +163,7 @@ public class MainWindow extends JFrame implements MouseListener
 				}
 				//////////////////////////////
 				repaint();
+				run=false;
 			}
 
 		});
@@ -172,10 +180,27 @@ public class MainWindow extends JFrame implements MouseListener
 			}
 
 		});
+		// the "play" action
+		item5.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				play=true;
+				GameAlgorithem ga=new GameAlgorithem(gameP);
+				ga.GoAlgo();
+
+
+				PlayThread t1 = new PlayThread();
+
+				t1.start();
+
+
+			}});
 		menu.add(item1);
 		menu.add(item2);
 		menu1.add(item3);
 		menu1.add(item4);
+		menu1.add(item5);
 		menuBar.add(menu);
 		menuBar.add(menu1);
 
@@ -207,13 +232,26 @@ public class MainWindow extends JFrame implements MouseListener
 		Packman temp_Packman ;
 		while(it1.hasNext()) {
 			temp_Packman=(Packman)it1.next();
-			//System.out.println(temp_Packman);
+			if(play) {
+				System.out.println(temp_Packman.GetPathpoint());
+				Iterator<PathPoint> it10 =temp_Packman.GetPathpoint().iterator();
+				PathPoint temp_Pathpoint;
+				while(it10.hasNext()) {
+					temp_Pathpoint=(PathPoint)it10.next();
+					temp_Pathpoint=m1.PathPointGps2Pix(temp_Pathpoint);
+					g.setColor(Color.RED);
+					g.fillOval( (int)temp_Pathpoint.x(), (int)temp_Pathpoint.y(), 5, 5);
+				}
+				play=false;
+				//System.out.println(temp_Packman);
+			}
 			temp_Packman=m1.PacGps2Pix(temp_Packman);
 			// System.out.println(temp_Packman);
 			g.setColor(Color.yellow);
-			System.out.println("packman "+temp_Packman.GetId()+"lines "+temp_Packman.getPath().size());
-			g.drawImage(p1, (int)temp_Packman.Getpoint().x(),  (int)temp_Packman.Getpoint().y(), 20, 20,this);
-			// g.fillOval((int)temp_Packman.Getpoint().x(), (int)temp_Packman.Getpoint().y(), 20, 20);
+			//System.out.println("packman "+temp_Packman.GetId()+"lines "+temp_Packman.getPath().size());
+			//g.drawImage(p1, (int)temp_Packman.Getpoint().x(),  (int)temp_Packman.Getpoint().y(), 20, 20,this);
+			g.fillOval((int)temp_Packman.Getpoint().x(), (int)temp_Packman.Getpoint().y(), 20, 20);
+			System.out.println("the packman syso anagin!");
 			//System.out.println("packman");
 			//System.out.println("his line: "+temp_Packman.getPath().size());
 			// Iterator<myLine> it3 =temp_Packman.getPath().iterator();
@@ -253,7 +291,7 @@ public class MainWindow extends JFrame implements MouseListener
 			//System.out.println("his line: "+temp_Solu.get(0));
 			Iterator<Line> it8=temp_Solu.iterator();
 			Line templ;
-			g.setColor(randomColor());
+			g.setColor(Color.yellow);
 			while(it8.hasNext()) {
 				templ=it8.next();
 				templ=m1.LineGps2Pix(templ);
@@ -355,6 +393,52 @@ public class MainWindow extends JFrame implements MouseListener
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
+
+	}
+
+	public class PlayThread extends Thread{
+
+
+
+		@Override
+		public void run() 
+		{
+			int i=0;
+			double x = 0;
+			double y = 0;
+			double z = 0;
+			double numofp=gameP.getPackmans().size();
+
+
+			while(i<10000) {
+				for (int j = 0; j < numofp; j++) {
+					
+						x=gameP.getPackmans().get(j).GetPathpoint().get(i).x();
+						y=gameP.getPackmans().get(j).GetPathpoint().get(i).y();
+						z=gameP.getPackmans().get(j).GetPathpoint().get(i).z();
+						gameP.getPackmans().get(j).setPosition(x,y,z);
+						//System.out.println(gameP.getPackmans().get(0));
+						try {
+							Thread.sleep(5);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					
+				}
+				repaint();
+				//System.out.println(i);
+				i++;
+			}
+
+		}
+
+
+
+
+
+
+
 
 	}
 

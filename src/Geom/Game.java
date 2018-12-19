@@ -42,7 +42,10 @@ public class Game {
 	public void addPac(Packman p) {
 		p.setId(this.Packmans.size());
 		Packmans.add(p);
+		
 	}
+	
+	
 	public void removeFbyId(int id) {
 		 Iterator<Fruit> it2 =Fruits.iterator();
 		 Fruit temp_Fruit ;

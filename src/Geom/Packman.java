@@ -11,7 +11,8 @@ public class Packman  {
 	private double speed;
 	private Point3D point;
 	private double time;
-	private ArrayList<Line> path; 
+	private ArrayList<Line> path;
+	private ArrayList<PathPoint> pathpoint;
 
 	public Packman(double lat,double lon,double alt,double speed,double id,double Radius) {
 		this.point=new Point3D(lat,lon,alt);
@@ -20,6 +21,9 @@ public class Packman  {
 		this.Radius=Radius;
 		this.time=0;
 		path=new ArrayList<Line>();
+		pathpoint=new ArrayList<PathPoint>();
+		PathPoint pp=new PathPoint(this.point,0);
+		pathpoint.add(pp);
 	}
 	public Packman(double lat,double lon,double id) {
 		this.point=new Point3D(lat,lon,0);
@@ -28,6 +32,7 @@ public class Packman  {
 		this.Radius=1;
 		this.time=0;
 		path=new ArrayList<Line>();
+		pathpoint=new ArrayList<PathPoint>();
 	}
 
 	
@@ -46,6 +51,7 @@ public class Packman  {
 		this.Radius=radius;
 		this.time=0;
 		path=new ArrayList<Line>();
+		pathpoint=new ArrayList<PathPoint>();
 	}
 	
 	
@@ -62,6 +68,7 @@ public class Packman  {
 		this.Radius=radius;
 		this.time=packman.GetTime();
 		path=new ArrayList<Line>();
+		pathpoint=new ArrayList<PathPoint>();
 	}
 	
 	public double GetId() {
@@ -69,6 +76,9 @@ public class Packman  {
 	}
 	public ArrayList<Line> GetPath() {
 		return this.path;
+	}
+	public ArrayList<PathPoint> GetPathpoint() {
+		return this.pathpoint;
 	}
 	public double GetTime() {
 		return this.time;
@@ -91,8 +101,15 @@ public class Packman  {
 	public void setPosition(Point3D p) {
 		this.point.SetP(p);
 	}
+	public void setPosition(double x,double y,double z) {
+		Point3D p=new Point3D(x,y,z);
+		this.point.SetP(p);
+	}
 	public void add2Path(Line l) {
 		 this.path.add(l);
+	}
+	public void add2Pathpoint(PathPoint pp) {
+		 this.pathpoint.add(pp);
 	}
 	public ArrayList<Line> getPath() {
 		return this.path;

@@ -2,6 +2,7 @@ package Coords;
 
 import Geom.Fruit;
 import Geom.Packman;
+import Geom.PathPoint;
 import Geom.myLine;
 import javafx.scene.shape.Line;
 
@@ -57,6 +58,23 @@ public class convert {
         Packman p1=new Packman(x1,y1,p.Getpoint().z(),p.Getspeed(),p.GetId(),p.GetRadius());
        // System.out.println(p1);
         return p1;
+	}
+	public PathPoint PathPointGps2Pix(PathPoint p) {
+	    double x,y;
+	    x=p.y() - mapLongitudeStart;
+	   // System.out.println(x);
+	    // do inverse because the latitude increases as we go up but the y decreases as we go up.
+	    // if we didn't do the inverse then all the y values would be negative.
+	    y = mapLatitudeStart-p.x();
+	    //System.out.println(y);
+	    // set x & y using conversion
+	    int x1 = (int) (mapWidth*(x/mapLongitude));
+	    int y1 = (int) (mapHeight*(y/mapLatitude));
+       // System.out.println((int)x1+","+ (int)y1);
+        Packman p1=new Packman(x1,y1,p.z(),0,0,0);
+        PathPoint p2=new PathPoint(p1.Getpoint(),p.getTime());
+       // System.out.println(p1);
+        return p2;
 	}
 	
 	

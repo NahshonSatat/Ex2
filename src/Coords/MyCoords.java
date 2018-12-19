@@ -90,6 +90,8 @@ public class MyCoords implements coords_converter{
 	    // Pitagoras 
 		return Math.sqrt(diffxM*diffxM+diffyM*diffyM);
 	}
+	
+
 	/** computes the 3D distance (in meters) between the two gps like points */
 	@Override
 	public double distance3d(Point3D gps0, Point3D gps1) {
