@@ -37,11 +37,23 @@ public class Path2Kml {
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.Locale;
 
+import javax.swing.JFrame;
+
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
+
+import GUI.MainWindow;
+import GUI.Map;
 import Geom.Game;
 import Geom.Packman;
 import Geom.PathPoint;
+import Geom.Point3D;
 import de.micromata.opengis.kml.v_2_2_0.Document;
 import de.micromata.opengis.kml.v_2_2_0.Folder;
 import de.micromata.opengis.kml.v_2_2_0.Icon;
@@ -83,6 +95,7 @@ public class Path2Kml {
 				PathPoint temp_Pathpoint;
 				while(it10.hasNext()) {
 					temp_Pathpoint=(PathPoint)it10.next();
+					System.out.println(temp_Pathpoint.getTime());
 					createPlacemarkWithChart( folder, temp_Pathpoint.y(), temp_Pathpoint.x(), temp_Pathpoint.z());
 				}
 
@@ -109,5 +122,41 @@ private static void createPlacemarkWithChart( Folder folder, double longitude, d
 	placemark.createAndSetPoint().addToCoordinates(longitude, latitude); // set coordinates
 
 }
+
+public  String TimeNow()
+{
+	return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()); 
+}
+
+public String pointTime(double time) throws ParseException, java.text.ParseException {
+	int x=(int)time;
+	String s=TimeNow();
+	//System.out.println(s);
+	long l=1000*x;
+	l=l+StringToMillis(s);
+	s=MillisToString(l);
+	//System.out.println(s);
+	return s;
+	
+}
+
+public String MillisToString(Long millis) 
+{
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	return sdf.format(new Date(millis));
+}
+
+
+
+public  long StringToMillis(String TimeAsString) throws ParseException, java.text.ParseException
+{
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
+	Date date =   format.parse(TimeAsString.toString());
+	long millis = date.getTime();
+	return millis;
+}
+
+
+
 
 }

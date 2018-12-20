@@ -117,8 +117,16 @@ public class GameAlgorithem {
 		   double distance  =md.distance2d(p.Getpoint(), f.Getpoint());
 		   double speed = p.Getspeed();
 		   //////////////////////////////////////////////
-		  // double pointTime=p.GetPathpoint().get(p.GetPathpoint().size()-1).getTime();
+		   int index=p.GetPathpoint().size();
+		   System.out.println(index);
 		   double pointTime=0;
+		   if(index>0) {
+			   index--; 
+		   
+		    pointTime=p.GetPathpoint().get(index).getTime();
+		   }
+
+		  // double pointTime=0;
 		   double numOfPoint=distance/speed;
 		   int i=0;
 		   while(i<numOfPoint) {

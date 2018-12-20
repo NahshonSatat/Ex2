@@ -191,7 +191,7 @@ public class MainWindow extends JFrame implements MouseListener
 				play=true;
 				GameAlgorithem ga=new GameAlgorithem(gameP);
 				ga.GoAlgo();
-
+                System.out.println(gameP.lastTimePoint());
 
 				PlayThread t1 = new PlayThread();
 
