@@ -12,13 +12,21 @@ import Geom.Point3D;
 import Geom.myLine;
 import javafx.scene.shape.Line;
 
+
+/**
+ * this class represent the algorithm of the path that the packmans will go to eat the fruits
+ */
 public class GameAlgorithem {
 	public static void main(String[] args)
 	{
 		
 	}
+	
+	
 	private double algotime;
 	private Game game;
+	
+	
 	public GameAlgorithem(Game g) {
 		this.game=g;
 	}
@@ -46,7 +54,9 @@ public class GameAlgorithem {
 
 		}
 
-	
+	/**
+	 *give the time between Packman and Fruit
+	 */
 	public double time(Packman p,Fruit f) {
 		MyCoords md=new MyCoords();
 		double time= 0;
@@ -57,6 +67,10 @@ public class GameAlgorithem {
 		return time;
 	    }
 	
+	
+	/**
+	 *give the nearest Fruit
+	 */
 	   public double firstFruitId(Packman p) {
 		   if(game.getFruits().isEmpty()) {
 			   return 0;
@@ -78,6 +92,11 @@ public class GameAlgorithem {
 				 return minFruitId;
 	       }
 	   }
+	   
+		/**
+		 *the first packman to go
+		 *and make his move and remove the fruit
+		 */
 	   
 	   public void firstPackGo() {
 		   Packman near_Packman =new Packman(game.getPackmans().get(0));
@@ -112,6 +131,10 @@ public class GameAlgorithem {
 				 game.removeFbyId((int)near_Fruit.GetId());
 	   }
 	   
+		/**
+		 * adding the path between the Packman and the fruit in point 
+		 * in the distace of one second
+		 */
 	   public void addToPointPath(Packman p,Fruit f){
 		   MyCoords md=new MyCoords();
 		   double distance  =md.distance2d(p.Getpoint(), f.Getpoint());

@@ -11,7 +11,9 @@ import File_format.Csv2Game;
 import javafx.scene.shape.Line;
 import solution.Solution;
 
-
+/**
+ * this class represent a game whit pacmans and fruits
+ */
 public class Game {
 	private ArrayList<Packman> Packmans;
 	private ArrayList<Fruit> Fruits;
@@ -45,7 +47,9 @@ public class Game {
 
 	}
 
-
+	/**
+	 * remove fruit by id
+	 */
 	public void removeFbyId(int id) {
 		Iterator<Fruit> it2 =Fruits.iterator();
 		Fruit temp_Fruit ;
@@ -76,7 +80,9 @@ public class Game {
 		solu.clear();
 		
 	}
-
+	/**
+	 * give the time of the last packman - the time of the algorithm
+	 */
 	public double lastTimePoint() {
 		double lastTime=0;
 		Iterator<Packman> it1 = Packmans.iterator();

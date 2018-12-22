@@ -13,6 +13,15 @@ public class convert {
 	private double mapLatitudeStart;
 	private double mapLongitude;
 	private double mapLatitude;
+	
+	/**
+	 * this class dose convert between pixels and lat lon coordinate
+	 * note you have to give this class the point of the edges of the map in lat lon and the size
+	 * of your map in pixels
+	 *  its not going to work
+	 * @author אליהו סתת
+	 *
+	 */
 	// according to https://stackoverflow.com/questions/38748832/convert-longitude-and-latitude-coordinates-to-image-of-a-map-pixels-x-and-y-coor
 	
 	
@@ -26,6 +35,9 @@ public class convert {
 		
 	}
 	 
+	/**
+	 * convert pacmans from pixels to gps
+	 */
 	public Packman PacPix2Gps(Packman p) {
 		double xPIX=p.Getpoint().x();
 		double yPIX=p.Getpoint().y();
@@ -43,6 +55,9 @@ public class convert {
 	       Packman p1=new Packman(y,x,p.Getpoint().z(),p.Getspeed(),p.GetId(),p.GetRadius());
 	       return p1;
 	}
+	/**
+	 * convert pacmans from  gps to pixels 
+	 */
 	public Packman PacGps2Pix(Packman p) {
 	    double x,y;
 	    x=p.Getpoint().y() - mapLongitudeStart;
@@ -59,6 +74,9 @@ public class convert {
        // System.out.println(p1);
         return p1;
 	}
+	/**
+	 * convert PathPoint from gps to pixels
+	 */
 	public PathPoint PathPointGps2Pix(PathPoint p) {
 	    double x,y;
 	    x=p.y() - mapLongitudeStart;
@@ -77,7 +95,9 @@ public class convert {
         return p2;
 	}
 	
-	
+	/**
+	 * convert Line from gps to pixels
+	 */
 	public Line LineGps2Pix(Line l) {
 	    double sx,sy,ex,ey;
 	    
@@ -98,13 +118,17 @@ public class convert {
         return l1;
 	}
 
-	
+	/**
+	 *if the size of the frame is change
+	 */
 	public void setFrame(int mapWidth,int mapHeight) {
 		this.mapHeight=mapHeight;
 		this.mapWidth=mapWidth;
 	}
 	
-	
+	/**
+	 * convert Fruit from pixels to gps
+	 */
 	public Fruit FruPix2Gps(Fruit f) {
 				double xPIX=f.Getpoint().x();
 	double yPIX=f.Getpoint().y();
@@ -124,7 +148,9 @@ public class convert {
 	}
 	
 	
-	
+	/**
+	 * convert Fruit from gps to pixels  
+	 */
 	public Fruit FruGps2Pix(Fruit f) {
 			    double x,y;
     x=f.Getpoint().y() - mapLongitudeStart;

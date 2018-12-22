@@ -1,7 +1,12 @@
 package Geom;
 
 public class Fruit {
-	
+	/**
+	 * this class reprisent a fruit
+	 * with point and Weight
+	 * @author אליהו סתת
+	 *
+	 */
 	private double Weight;
 	private double id;
 	private Point3D point; 

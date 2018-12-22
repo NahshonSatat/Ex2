@@ -12,6 +12,12 @@ import Geom.Packman;
 
 public class Csv2Game {
 
+	/**
+	 * this class read csv file to game
+	 * according to Yael moodle
+	 * @author אליהו סתת
+	 *
+	 */
 	  public Game ReadFile(File e) throws Exception {
 		  Game layer =new Game();
 			

@@ -5,6 +5,15 @@ import java.util.ArrayList;
 import GIS.My_Meta_data;
 import javafx.scene.shape.Line;
 
+/**
+ * this class represent a packman that is a point 
+ * with speed and the path that he go
+ * he can build from csv line
+ * and can change his position
+ * with point and Weight
+ * @author אליהו סתת
+ *
+ */
 public class Packman  {
 	private double Radius;
 	private double id;

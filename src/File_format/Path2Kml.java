@@ -60,13 +60,19 @@ import de.micromata.opengis.kml.v_2_2_0.Icon;
 import de.micromata.opengis.kml.v_2_2_0.Kml;
 import de.micromata.opengis.kml.v_2_2_0.Placemark;
 import de.micromata.opengis.kml.v_2_2_0.Style;
-
+import de.micromata.opengis.kml.v_2_2_0.TimeSpan;
 /**
- * This example generates a KML file with a placemark and a chart for each continent. The chart is generated with the Google Chart API and
- * show the area (surface of the earth) of each continent.
- * 
- * Google Chart API example: http://chart.apis.google.com/chart?cht=p3&chd=t:60,40&chs=250x100&chl=Hello|World
+ * this class creat a kml file of the path of the packmans of the game
+ * according to:
+ * https://stackoverflow.com/questions/1459656/how-to-get-the-current-time-in-yyyy-mm-dd-hhmisec-millisecond-format-in-java
+ * https://labs.micromata.de/projects/jak/quickstart.html
+ * https://stackoverflow.com/questions/574881/how-can-i-string-format-a-timespan-object-with-a-custom-format-in-net
+ * https://stackoverflow.com/questions/8477246/how-to-convert-date-represented-as-a-string-to-milliseconds
+ *https://stackoverflow.com/questions/4142313/java-convert-milliseconds-to-time-format
+ * @author אליהו סתת
+ *
  */
+
 public class Path2Kml {
 	private Game g;
 
@@ -80,28 +86,67 @@ public class Path2Kml {
 	
 	public  void tokml() throws FileNotFoundException {
 		final Kml kml = new Kml();
-		//Document doc = kml.createAndSetDocument().withName("JAK Example1").withOpen(true);
 		Document doc = kml.createAndSetDocument().withName("JAK Example1").withOpen(true);
 		// create a Folder
 		Folder folder = doc.createAndAddFolder();
 		folder.withName("Continents with Earth's surface").withOpen(true);
-
+		
 		// create Placemark elements
 		Iterator<Packman> it1 =g.getPackmans().iterator();
 		Packman temp_Packman ;
+		
+		
 		while(it1.hasNext()) {
 			temp_Packman=(Packman)it1.next();
 				Iterator<PathPoint> it10 =temp_Packman.GetPathpoint().iterator();
 				PathPoint temp_Pathpoint;
+				
+				
 				while(it10.hasNext()) {
 					temp_Pathpoint=(PathPoint)it10.next();
-					System.out.println(temp_Pathpoint.getTime());
-					createPlacemarkWithChart( folder, temp_Pathpoint.y(), temp_Pathpoint.x(), temp_Pathpoint.z());
+					Placemark p = doc.createAndAddPlacemark();
+					p.withOpen(Boolean.TRUE).createAndSetPoint()
+					.addToCoordinates(temp_Pathpoint.y(),temp_Pathpoint.x());
+					String start="";
+					try {
+						start = MillisToString(StringToMillis(TimeNow())+(int)temp_Pathpoint.getTime()*1000);
+					} catch (ParseException | java.text.ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					String end="";
+					try {
+						end = MillisToString(StringToMillis(TimeNow())+((int)temp_Pathpoint.getTime()+1)*1000);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (java.text.ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					// make the time span format
+					String[] spl1=start.split(" ");
+					start=spl1[0]+"T"+spl1[1]+"Z";
+					
+					String[] spl2=end.split(" ");
+					end=spl2[0]+"T"+spl2[1]+"Z";
+			
+					//System.out.println("time1: "+start);
+					//System.out.println("time2: "+end);
+					// add the time span (life of this point) start and end
+					TimeSpan a=p.createAndSetTimeSpan();
+					a.setBegin(start);
+					a.setEnd(end);
+
+					//System.out.println(temp_Pathpoint.getTime());
+					//createPlacemarkWithChart( folder, temp_Pathpoint.y(), temp_Pathpoint.x(), temp_Pathpoint.z());
 				}
 
+
 			}
-		// print and save
-		kml.marshal(new File("path1.kml"));
+		// save the kml
+		kml.marshal(new File("path.kml"));
 	}
 
 	

@@ -41,7 +41,16 @@ import javafx.stage.FileChooser;
 
 
 
-
+/**
+ * this class is the gui class of this game
+ * @author אליהו סתת
+ *with the following application:
+ *you can add packman - press left 
+ *you can add fruit - press right
+ *you can save as csv file - and load 
+ *you can run the algorithm or play and see it
+ *and you can export the path of the packmans to kml 
+ */
 public class MainWindow extends JFrame implements MouseListener
 {
 	private static final ImageIO ImegeIO = null;
@@ -50,8 +59,8 @@ public class MainWindow extends JFrame implements MouseListener
 	//////////////// Change to private!!!!!!!!!!!!!!!!
 	public BufferedImage myImage;
 	private convert m1;
-	private Image p1;
-	private Image f1;
+	//private Image p1;
+	//private Image f1;
 	private boolean run=false;
 	private boolean play=false;
 	// the constructor 
@@ -60,7 +69,7 @@ public class MainWindow extends JFrame implements MouseListener
 		this.map=map;
 		gameP=new Game();
 		File pacFile = new File("C:\\Users\\אליהו סתת\\Downloads\\1.png");
-		p1=ImageIO.read(pacFile);
+		//p1=ImageIO.read(pacFile);
 		initGUI();		
 		this.addMouseListener(this);
 		m1=new convert(1433,642,35.202306,32.105730,35.212407,32.101867);
