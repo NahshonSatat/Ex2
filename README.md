@@ -4,16 +4,12 @@ it can make csv file to kml formt that can be seen in google earth
 eliahu satat nashon satat.
 
 Descreption
-The project represents a game called Pacman aand fruits , the game is performed on img of Google Earth. The course of the game: Choose a map location for Pacmans and fruits, then the goal of the Pacmans to eat the fruits in the shortest time (in terms of distance), the end of the game: Will be displayed on the map any track that Packman has made There is an example below the map.
+The project represents a game called Pacman aand fruits , the game is performed on img of Google Earth. The course of the game: Choose a map location for Pacmans and fruits, then the goal of the Pacmans to eat the fruits in the shortest time (in terms of time), the end of the game: Will be displayed on the map any track that Packman has made There is an example below the map.
 
-Algorithms
-In the algorithm package there is an algorithms:
+abute the Algorithms read:
+https://github.com/davidsatat/Ex2/wiki
 
-
-MultiCSV : algorithm that receives a project and target folder for scanning, scans it recursively, and once it reaches a CSV file, it creates a layer and adds it to the project.
-Coords
-The Coords package has the:
-
+it base on ex2 so its include:
 mycoords class
 Represents a Class that allows us to perform calculations between GPS points such as:
 
@@ -29,8 +25,6 @@ The class has two functions:
 
 CSV2Kml function accepts a .csv file as a PATH, And manually converts it to a .kml file.
 Object2Kml function accepts a project. Which inside it has layers and within layers there is information with points, Then the function converts the points to the directions on the map (each route on the map represents a layer)
-ExampleAfterRun (the Picture is from GoogleEarth ) :
-1
 
 Geom
 Geom package represents shapes in space:
@@ -44,8 +38,8 @@ Meta_Data : represents Data according to class. For example, in GIS_Element the 
 GIS_Element : Represents a GPS point of a map with information about the point.
 GIS_Layer : Represents a collection of points / directions on the map. (Similar to one csv file)
 GIS_Project : Represents a collection of layers / tracks on the map. (Similar to the folder of .csv files)
-ClassDiagram
-gisdiagram
+
+and more to ex3
 
 ExampleGameMap
 ariel1
@@ -53,10 +47,5 @@ ariel1
 Sorces
 converting coordinates : https://stackoverflow.com/questions/1185408/converting-from-longitude-latitude-to-cartesian-coordinates
 
-calculating 3D vector : https://stackoverflow.com/questions/41912407/calculate-a-vector-in-meter-from-two-gps-coordinates
-
-calculating distance : http://www.vias.org/comp_geometry/math_coord_convert_3d.htm
-
 how to convert csv to kml(from the resource) : http://convertcsv.com/csv-to-kml.htm
 
-the idea of Azimuth : https://en.wikipedia.org/wiki/Azimuth
