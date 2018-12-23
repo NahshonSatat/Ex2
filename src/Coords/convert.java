@@ -31,6 +31,7 @@ public class convert {
 		this.mapLongitudeStart=mapLongitudeStart;
 		this.mapLatitudeStart=mapLatitudeStart;
 		this.mapLongitude=mapLongitudeEnd-mapLongitudeStart;
+		
 		this.mapLatitude=mapLatitudeStart-mapLatitudeEnd;
 		
 	}
@@ -167,6 +168,41 @@ public class convert {
    // System.out.println(p1);
     return p1;
 	}
+	public int getMapWidth() {
+		return mapWidth;
+	}
+
+	
+
+	public int getMapHeight() {
+		return mapHeight;
+	}
+
+	
+
+	public double getMapLongitudeStart() {
+		return mapLongitudeStart;
+	}
+
+	
+
+	public double getMapLatitudeStart() {
+		return mapLatitudeStart;
+	}
+
+	
+
+	public double getMapLongitude() {
+		return mapLongitude;
+	}
+
+	
+
+	public double getMapLatitude() {
+		return mapLatitude;
+	}
+
+	
 	
 
 }

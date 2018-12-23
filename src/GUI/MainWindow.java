@@ -38,7 +38,18 @@ import Geom.myLine;
 import Threads.PlayThread;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
+import java.awt.Graphics;
+import java.awt.Menu;
+import java.awt.MenuBar;
+import java.awt.MenuItem;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 
 
 /**
@@ -59,7 +70,8 @@ public class MainWindow extends JFrame implements MouseListener
 	//////////////// Change to private!!!!!!!!!!!!!!!!
 	public BufferedImage myImage;
 	private convert m1;
-	//private Image p1;
+	//private Image
+	//p1;
 	//private Image f1;
 	private boolean run=false;
 	private boolean play=false;
@@ -68,7 +80,7 @@ public class MainWindow extends JFrame implements MouseListener
 	{
 		this.map=map;
 		gameP=new Game();
-		File pacFile = new File("C:\\Users\\אליהו סתת\\Downloads\\1.png");
+		//File pacFile = new File("C:\\Users\\נחשון סתת\\Downloads\\1.png");
 		//p1=ImageIO.read(pacFile);
 		initGUI();		
 		this.addMouseListener(this);
@@ -235,9 +247,11 @@ public class MainWindow extends JFrame implements MouseListener
 		menuBar.add(menu1);
 
 		this.setMenuBar(menuBar);
-
+		//myImage = ImageIO.read(new File(map.getPath()));
 		try {
-			myImage = ImageIO.read(new File(map.getPath()));
+			//myImage = ImageIO.read(new File("Ariel1.png"));
+			//myImage = ImegeIO.read(new File("Ariel1.png"));
+			myImage = ImegeIO.read(new File(map.getPath()));
 			// myImage = ImageIO.read(new File("C:\\Users\\נחשון סתת\\Desktop\\Ariel1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();

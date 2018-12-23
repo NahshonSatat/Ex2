@@ -32,7 +32,7 @@ public class Main
 		Point3D g1=new Point3D(32.103506,35.207834);
 		Point3D p2=new Point3D(912,388,0);
 		Point3D g2=new Point3D(32.103418,35.208723);
-		Map m=new Map("C:\\\\Users\\\\אליהו סתת\\\\Desktop\\\\Ariel1.png",g1,g2);
+		Map m=new Map("C:\\Users\\נחשון סתת\\Desktop\\Ariel1.png",g1,g2);
 		MainWindow window = new MainWindow(m);
 		window.setVisible(true);
 		window.setSize(window.myImage.getWidth(),window.myImage.getHeight());
@@ -40,10 +40,10 @@ public class Main
 		
 		
 	//System.out.println(TimeNow());
-	//long l=1000;
-	int x=1;
-	System.out.println(TimeNow());
-    System.out.println(pointTime(x));
+//	//long l=1000;
+//	int x=1;
+//	System.out.println(TimeNow());
+//    System.out.println(pointTime(x));
 	}
 
 	public static String pointTime(double time) throws ParseException, java.text.ParseException {
