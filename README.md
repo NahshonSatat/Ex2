@@ -1,13 +1,14 @@
-# Ex2
+# Ex3
 this is a project in our opp course in ariel university 
 it can make csv file to kml formt that can be seen in google earth 
-eliahu satat nashon satat
-PacmanNavigation200px-pac_man svg
+eliahu satat nashon satat.
+
 Descreption
-The project represents a game called Pacman Navigation, the game is performed on img of Google Earth. The course of the game: Choose a map location for Pacmans and fruits, then the goal of the Pacmans to eat the fruits in the shortest time (in terms of distance), the end of the game: Will be displayed on the map any track that Packman has made There is an example below the map.
+The project represents a game called Pacman aand fruits , the game is performed on img of Google Earth. The course of the game: Choose a map location for Pacmans and fruits, then the goal of the Pacmans to eat the fruits in the shortest time (in terms of distance), the end of the game: Will be displayed on the map any track that Packman has made There is an example below the map.
 
 Algorithms
 In the algorithm package there is an algorithms:
+
 
 MultiCSV : algorithm that receives a project and target folder for scanning, scans it recursively, and once it reaches a CSV file, it creates a layer and adds it to the project.
 Coords
